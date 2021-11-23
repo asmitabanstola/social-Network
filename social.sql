@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2021 at 06:10 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: Nov 23, 2021 at 03:13 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `social`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `post_body` text NOT NULL,
+  `posted_by` varchar(60) NOT NULL,
+  `posted_to` varchar(60) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `removed` varchar(3) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -69,23 +85,13 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`id`, `body`, `added_by`, `user_to`, `date_added`, `user_closed`, `deleted`, `likes`) VALUES
 (26, 'ppppp', 'monica_green', 'none', '2021-11-17 04:04:45', 'no', 'no', 0),
 (27, 'yytt', 'monica_green', 'none', '2021-11-17 04:05:03', 'no', 'no', 0),
-(28, 'yytt', 'monica_green', 'none', '2021-11-17 04:05:22', 'no', 'no', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `post_comments`
---
-
-CREATE TABLE `post_comments` (
-  `id` int(11) NOT NULL,
-  `post_body` text NOT NULL,
-  `posted_by` varchar(60) NOT NULL,
-  `posted_to` varchar(60) NOT NULL,
-  `date_added` datetime NOT NULL,
-  `removed` varchar(3) NOT NULL,
-  `post_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(28, 'yytt', 'monica_green', 'none', '2021-11-17 04:05:22', 'no', 'no', 0),
+(29, 'post1', 'asmita_banstola', 'none', '2021-11-23 09:09:00', 'no', 'no', 0),
+(30, 'post2', 'asmita_banstola', 'none', '2021-11-23 09:09:18', 'no', 'no', 0),
+(31, 'post3', 'asmita_banstola', 'none', '2021-11-23 09:12:08', 'no', 'no', 0),
+(32, 'post4', 'asmita_banstola', 'none', '2021-11-23 09:12:19', 'no', 'no', 0),
+(33, 'post5', 'asmita_banstola', 'none', '2021-11-23 09:12:24', 'no', 'no', 0),
+(34, 'Hello !How are you?', 'anjana_poudel', 'none', '2021-11-23 09:44:57', 'no', 'no', 0);
 
 -- --------------------------------------------------------
 
@@ -123,12 +129,18 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 (11, 'Monica', 'Green', 'monica_green', 'Monica@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-10-30', 'assets/images/profile_pics/defaults/b.png', 1, 0, 'no', ','),
 (12, 'Suja', 'Amatya', 'suja_amatya', 'Suja@gmail.com', 'e86fdc2283aff4717103f2d44d0610f7', '2021-11-02', 'assets/images/profile_pics/defaults/a.jpg', 1, 0, 'no', ','),
 (13, 'Mickey', 'Mouse', 'mickey_mouse_1_2', 'Mickey@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-11-10', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
-(15, 'Asmita1', 'Banstola', 'asmita1_banstola', 'As@gmail.com', '828c88f34ecb4c1ca8d89e018c6fad1a', '2021-11-16', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
-(16, 'Asmita', 'Banstola', 'asmita_banstola', 'Asmita@gmail.com', '712123cd000f534df53cfdf739865da9', '2021-11-16', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ',');
+(17, 'Asmita', 'Banstola', 'asmita_banstola', 'Asmi@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/defaults/a.jpg', 5, 0, 'no', ',anjana_poudel'),
+(18, 'Anjana', 'Poudel', 'anjana_poudel', 'Anjana@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/defaults/b.png', 1, 0, 'no', ',asmita_banstola');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `friends`
@@ -149,12 +161,6 @@ ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `post_comments`
---
-ALTER TABLE `post_comments`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -163,6 +169,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `friends`
@@ -180,19 +192,13 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `post_comments`
---
-ALTER TABLE `post_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
