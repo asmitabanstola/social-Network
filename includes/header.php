@@ -18,8 +18,8 @@ if (isset($_SESSION['username'])) {
 		<title>WELCOME TO VIRTUALLY</title>
 
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+		<script src="assets/JS/jquery.min.js"></script>
+   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 		<script src="assets/JS/bootstrap.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">

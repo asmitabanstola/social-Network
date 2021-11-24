@@ -136,5 +136,5 @@ textarea:focus{
 	margin-right: 7px;
 }
 .post_profile_pic img{
-	border-radius: 5px;
+	border-radius: 50%;
 }
