@@ -35,11 +35,11 @@ if (isset($_SESSION['username'])) {
 			<!-- <img src="assets/images/icon.png"> -->
 	
 	<nav>
-		<a href="#">
+		<a href="<?php echo $user['username'];?>">
 			 <?php echo $user['first_name']; ?>
   	</a> 
 
-  	<a href="#"><i class="fa fa-home fa-lg"></i>
+  	<a href="index.php"><i class="fa fa-home fa-lg"></i>
   	</a>
 
 

@@ -12,12 +12,13 @@
 		 	font-family:Arial,Helvetica, sans-serif;
 		 }
 		body{
-			background-color: #fff;
+			background-color: none;
 		}
 		 form{
 			position: absolute;
 			top: 0;
 			}
+
 	</style>
 	<?php
 	session_start();
@@ -65,15 +66,14 @@
 	$num_rows=mysqli_num_rows($check_query);
 	if($num_rows>0){
 		echo'<form action="like.php?post_id=' .$post_id .'" method="POST">
-		<input type="submit" class="commit_like" name="unlike_button" value="Unlike">
-		<div class="like_value">
-		'.$total_likes .' Likes
+		<input type="submit" class="comment_like" name="unlike_button" value="Unlike">
+		<div class="like_value"style="display:contents;">'.$total_likes .' Likes
 		</div>
 		</form>';
 	}else{
 		echo'<form action="like.php?post_id=' .$post_id .'" method="POST">
-		<input type="submit" class="commit_like" name="like_button" value="Like">
-		<div class="like_value">
+		<input type="submit" class="comment_like" name="like_button" value="Like">
+		<div class="like_value"style="display:contents;">
 		'.$total_likes .' Likes
 		</div>
 		</form>';
