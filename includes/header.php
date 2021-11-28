@@ -51,7 +51,7 @@ if (isset($_SESSION['username'])) {
   		<i class="fa fa-envelope fa-lg"></i>
   	</a>
 
-  	<a href="#">
+  	<a href="requests.php">
   		<i class="fa fa-user fa-lg"></i>
   	</a>
 
