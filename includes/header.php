@@ -21,11 +21,14 @@ if (isset($_SESSION['username'])) {
 		<script src="assets/JS/jquery.min.js"></script>
    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 		<script src="assets/JS/bootstrap.js"></script>
-
+    <script src="assets/JS/demo.js"></script>
+    <script src="assets/JS/bootbox.min.js"></script>
+    <script src="assets/js/jquery.jcrop.js"></script>
+  <script src="assets/js/jcrop_bits.js"></script>
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 		<link rel="stylesheet" type="text/css" href="assets/CSS/bootstrap.css">
-
+    <link rel="stylesheet" href="assets/css/jquery.Jcrop.css" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="assets/CSS/style.css">
 
 </head>
