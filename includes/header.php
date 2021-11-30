@@ -25,7 +25,7 @@ if (isset($_SESSION['username'])) {
     <script src="assets/JS/bootbox.min.js"></script>
     <script src="assets/js/jquery.jcrop.js"></script>
   <script src="assets/js/jcrop_bits.js"></script>
-	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css">
 
 		<link rel="stylesheet" type="text/css" href="assets/CSS/bootstrap.css">
     <link rel="stylesheet" href="assets/css/jquery.Jcrop.css" type="text/css" />

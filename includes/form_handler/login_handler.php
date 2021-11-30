@@ -11,6 +11,7 @@ if (isset($_POST['login_button'])) {
 	if ($check_login_query == 1) {
 		$row = mysqli_fetch_array($check_database_query); //fetch database info
 	$username = $row['username'];
+	$id=$row['id'];
 
 $user_closed_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email' AND user_closed='yes'");
 if(mysqli_num_rows($user_closed_query) == 1) {
@@ -19,6 +20,7 @@ if(mysqli_num_rows($user_closed_query) == 1) {
 }
 
 	$_SESSION['username'] = $username;
+	$_SESSION['id'] = $id;
 	header("Location: index.php");
 		exit();
 	}

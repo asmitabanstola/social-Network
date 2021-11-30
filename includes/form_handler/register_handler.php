@@ -111,6 +111,8 @@ if($rand == 1)
 	 	$profile_pic = "assets/images/profile_pics/defaults/b.png";
 	 
 	 $query = mysqli_query($con, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
+	 $id = mysqli_insert_id($con); //number
+	$_SESSION['id'] =$id;
 
 	 array_push($error_array, "<span style = 'color: #ddd;'>You are all set!Go ahead and Login! </span><br>");
 
