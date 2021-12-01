@@ -117,11 +117,11 @@ class User {
 			foreach($user_to_check_array_explode as $j) {
 
 				if($i == $j && $i != "") {
-					$mutualFriends++;
+					$MutualFriends++;
 				}
 			}
 		}
-		return $mutualFriends;
+		return $MutualFriends;
 	}
 
 
