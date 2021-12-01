@@ -66,7 +66,7 @@ else{
 
 	
 	else{
-		array_push($error_array, "Emails dont match<br>");
+		array_push($error_array, "Emails don't match<br>");
 	}
 
 	if(strlen($fname) > 25 || strlen($fname) < 2) {
