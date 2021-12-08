@@ -12,7 +12,7 @@ body{
 	display: inline-flex;
 	position: fixed;
 	z-index: 10;
-
+	top: 0px;
 }
  
 a {
@@ -74,7 +74,7 @@ color:#fff ;
 	margin-top: 50px;
 }
 .user_details_left_right{
-	width:125px;
+	width:20%;
 	display: inline-block;
 	position: absolute;
 }
@@ -86,9 +86,9 @@ color:#fff ;
 }
 .main_column{
 	float:right;
-	width:70%;
+	width:60%;
 	z-index:-1;
-	min-height: 150px;
+	min-height: 170px;
 	background-color: #;
 	margin-top: 50px;
 }
@@ -306,6 +306,117 @@ textarea:focus{
 }
 
 .profile_info_bottom {
-	margin: 0 0 0 0px;
+	margin-left: 20px;
+	margin-bottom: 5px;
 
+}
+
+@media only screen and (max-width: 1200px){
+	.user_details,
+	.main_column,.loaded_conversation{
+		width: 60%;
+		float: none;
+
+	}
+	.user_details{
+		margin-bottom: 12px;
+	}
+	.wrapper{
+		margin:10px;
+	}
+}
+#message_textarea{
+	width:80%;
+	margin-right: 8px;
+	border-radius: 5px;
+	border:1px solid #D3D3D3;
+	font-size: 12px;
+}
+#message_submit{
+	height: 41px;
+	width: 120px;
+	margin: 0;
+	position: absolute;
+	border: none;
+	border-radius: 3px;
+	background-color: #2c2c54;
+	color: #fff;
+	text-shadow: #73B6E2 0.5px 0.5px 0px;
+	font-size:90%;
+	outline: 0;
+
+}
+.message{
+	border:1px solid #000;
+	border-radius: 5px;
+	padding:5px 10px;
+	display:inline-block;
+	color: #fff;
+}
+.message#blue{
+	background-color: #3498db;
+	border-color: #2980b9;
+	float:right;
+	margin-bottom: 5px; 
+}
+.message#green{
+	background-color: #2ecc71;
+	border-color: #27ae60;
+	float:left;
+	margin-bottom: 5px: 
+}
+.loaded_messages{
+	height: 65%;
+	min-height:300px;
+	max-height: 400px;
+	overflow: scroll;
+	margin-bottom: 10px;
+}
+.loaded_conversations{
+	max-height: 200px;
+	overflow: scroll;
+}
+.user_found_messages{
+	border-bottom: 1px solid #D3D3D3;
+	padding: 8px 8px 10px 8px;
+}
+.user_found_messages:hover{
+	background-color: #D3D3D3;
+}
+.user_found_messages img{
+	height: 35px;
+	float: left;
+}
+#grey{
+	color: #BCBCBC;
+
+}
+.resultDisplay{
+	padding: 5px 5px 0 5px;
+	height: 60px;
+	border-bottom: 1px solid #D3D3D3;
+}
+.resultDisplay a{
+	float: none;
+}
+.resultDisplay:hover{
+	background-color: #EBEBEB;
+	text-decoration:none;
+}
+.liveSearchProfilePic img{
+	height: 50px;
+	border-radius: 25px;
+	margin:1px 12px 0 2px;
+	float: left;
+}
+.liveSearchText{
+	background-color: transparent;
+	color:#1E96CA;
+}
+.liveSearchText p{
+	margin-left: 10px;
+	font-size: 12px;
+}
+.tab-content{
+	margin-top: 25px;
 }

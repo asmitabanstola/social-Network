@@ -10,7 +10,7 @@ class Post {
 
 	public function submitPost($body, $user_to) {
 		$date_added = date("Y-m-d H:i:s");
-		$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', 'sda', 'asdfsd', 'asdfsdaf', '$date_added', 'no', 'no', '0')");
+		// $query = mysqli_query($this->con, "INSERT INTO posts VALUES('', 'sda', 'asdfsd', 'asdfsdaf', '$date_added', 'no', 'no', '0')");
 		$body = strip_tags($body); //removes html tags 
 		$body = mysqli_real_escape_string($this->con, $body);
 		$check_empty = preg_replace('/\s+/', '', $body); //Deltes all spaces 

@@ -1,8 +1,6 @@
 <?php 
 session_start();
 include("includes/header.php");
-include("includes/classes/User.php");
-include("includes/classes/Post.php")
 ?>
 <div class="main_column column" id="main_column">
 	<h4>Friend Requests</h4>

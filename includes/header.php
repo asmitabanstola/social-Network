@@ -1,6 +1,9 @@
  <?php
 // session_start();
 require 'config/config.php';
+include("includes/classes/User.php");
+include("includes/classes/Post.php");
+include("includes/classes/Message.php");
 
  //print_r($_SESSION['username']);
 
@@ -50,7 +53,7 @@ if (isset($_SESSION['username'])) {
   		<i class="fa fa-bell-o fa-lg"></i>
   	</a>
 
-  	<a href="#">
+  	<a href="messages.php">
   		<i class="fa fa-envelope fa-lg"></i>
   	</a>
 
