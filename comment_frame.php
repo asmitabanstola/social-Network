@@ -67,7 +67,7 @@ if (isset($_SESSION['username'])) {
 	if(isset($_GET['post_id'])){
 		$post_id=$_GET['post_id'];
 	}
-	$user_query=mysqli_query($con,"SELECT added_by,user_to From posts WHERE id='$post_id'");
+	$user_query=mysqli_query($con,"SELECT added_by From posts WHERE id='$post_id'");
 	$row=mysqli_fetch_array($user_query);
 	$posted_to=$row['added_by'];
 	if(isset($_POST['postComment'.$post_id])){

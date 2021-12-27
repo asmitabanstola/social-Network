@@ -27,8 +27,11 @@ if(isset($_POST['post_message'])){
 	if(isset($_POST['message_body'])){
 		$body=mysqli_real_escape_string($con, $_POST['message_body']);
     $date = date("Y-m-d H:i:s");
-    $message_obj->sendMessage($username, $body, $date);
+    $id1=mysqli_query($con,"SELECT id FROM users WHERE username='$username'");
+    $id=implode("",mysqli_fetch_assoc($id1));
+    $message_obj->sendMessage($id, $body, $date);
 	}
+  
 	 $link = '#profileTabs a[href="#messages_div"]';
 	echo "<script>
 	$(function(){

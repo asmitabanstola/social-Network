@@ -17,7 +17,73 @@ require 'includes/form_handler/login_handler.php';
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 	<script src="assets/JS/register.js"></script>
-
+	  <style>
+      * {
+        box-sizing: border-box;
+      }
+      .openBtn {
+        display: flex;
+        justify-content: left;
+      }
+      .openButton {
+        border: none;
+        border-radius: 5px;
+        background-color: #1c87c9;
+        color: white;
+        padding: 14px 20px;
+        cursor: pointer;
+        position: fixed;
+      }
+      .loginPopup {
+        position: relative;
+        text-align: center;
+        width: 100%;
+      }
+      .formPopup {
+        display: none;
+        position: fixed;
+        left: 45%;
+        top: 5%;
+        transform: translate(-50%, 5%);
+        border: 3px solid #999999;
+        z-index: 9;
+      }
+      .formContainer {
+        max-width: 300px;
+        padding: 20px;
+        background-color: #fff;
+      }
+      .formContainer input[type=text],
+      .formContainer input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+      }
+      .formContainer input[type=text]:focus,
+      .formContainer input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+      }
+      .formContainer .btn {
+        padding: 12px 20px;
+        border: none;
+        background-color: #8ebf42;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+      .formContainer .cancel {
+        background-color: #cc0000;
+      }
+      .formContainer .btn:hover,
+      .openButton:hover {
+        opacity: 1;
+      }
+    </style>
 </head>
 <body>
 	<?php
@@ -30,6 +96,12 @@ require 'includes/form_handler/login_handler.php';
 		});
 		</script>
 	';
+	   function openForm() {
+        document.getElementById("popupForm").style.display == "block";
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display == "none";
+      }
 	}
 	?> 
 
@@ -96,11 +168,6 @@ require 'includes/form_handler/login_handler.php';
 		} 
 	?>" required>
 		<br>
-	
-
-
-			
-
 		<input type="email2" name="reg_email2" placeholder="Confirm Email" value="<?php
 		 if(isset($_SESSION['reg_email2'])) {
 			echo $_SESSION['reg_email2'];
@@ -122,15 +189,13 @@ require 'includes/form_handler/login_handler.php';
 				 else if (in_array("Your password can only contain english character or number<br>", $error_array)) echo "Your password can only contain english character or number<br>";
 				 ?>
 
-	<input type="submit" name="register_button" value="Register" required>
+	<input type="submit" name="register_button" value="Register" onclick="openForm()" required>
 		<br>
 		<?php if(in_array("", $error_array)) echo "Your password donot match<br>"; 
 		?>
 		<a href="#" id="signin" class="signin">Already have an account? Sign In here!</a>
-
-	
-	
 	</form>
+ 
 	</div>
 </div>
 </div>

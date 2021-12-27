@@ -10,8 +10,8 @@ class Message {
 
 	public function getMostRecentUser() {
 		$userLoggedIn = $this->user_obj->getUsername();
-
-		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedIn' OR user_from='$userLoggedIn' ORDER BY id DESC LIMIT 1");
+		$userLoggedId = $this->user_obj->getId();
+		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedId' OR user_from='$userLoggedId' ORDER BY id DESC LIMIT 1");
 
 		if(mysqli_num_rows($query) == 0)
 			return false;
@@ -20,7 +20,7 @@ class Message {
 		$user_to = $row['user_to'];
 		$user_from = $row['user_from'];
 
-		if($user_to != $userLoggedIn)
+		if($user_to != $userLoggedId)
 			return $user_to;
 		else 
 			return $user_from;
@@ -28,27 +28,29 @@ class Message {
 	}
 
 	public function sendMessage($user_to, $body, $date) {
-
 		if($body != "") {
 			$userLoggedIn = $this->user_obj->getUsername();
-			$query = mysqli_query($this->con, "INSERT INTO messages VALUES('', '$user_to', '$userLoggedIn', '$body', '$date', 'no', 'no', 'no')");
+			$userLoggedId = $this->user_obj->getId();
+			$query = mysqli_query($this->con, "INSERT INTO messages VALUES('', '$user_to', '$userLoggedId', '$body', '$date', 'no', 'no', 'no')");
 		}
 	}
 
 	public function getMessages($otherUser) {
 		$userLoggedIn = $this->user_obj->getUsername();
+		$userLoggedId = $this->user_obj->getId();
 		$data = "";
+		$oUser=mysqli_query($this->con,"SELECT id FROM users WHERE username='$otherUser'");
+		$ouser=implode("",mysqli_fetch_assoc($oUser));
+		$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to='$userLoggedId' AND user_from='$ouser'");
 
-		$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to='$userLoggedIn' AND user_from='$otherUser'");
-
-		$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to='$userLoggedIn' AND user_from='$otherUser') OR (user_from='$userLoggedIn' AND user_to='$otherUser')");
+		$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to='$userLoggedId' AND user_from='$ouser') OR (user_from='$userLoggedId' AND user_to='$ouser')");
 
 		while($row = mysqli_fetch_array($get_messages_query)) {
 			$user_to = $row['user_to'];
 			$user_from = $row['user_from'];
 			$body = $row['body'];
 
-			$div_top = ($user_to == $userLoggedIn) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
+			$div_top = ($user_to == $userLoggedId) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
 			$data = $data . $div_top . $body . "</div><br><br>";
 		}
 		return $data;
@@ -56,11 +58,11 @@ class Message {
 
 	public function getLatestMessage($userLoggedIn, $user2) {
 		$details_array = array();
-
-		$query = mysqli_query($this->con, "SELECT body, user_to, date FROM messages WHERE (user_to='$userLoggedIn' AND user_from='$user2') OR (user_to='$user2' AND user_from='$userLoggedIn') ORDER BY id DESC LIMIT 1");
+		$userLoggedId = $this->user_obj->getId();
+		$query = mysqli_query($this->con, "SELECT body, user_to, date FROM messages WHERE (user_to='$userLoggedId' AND user_from='$user2') OR (user_to='$user2' AND user_from='$userLoggedId') ORDER BY id DESC LIMIT 1");
 
 		$row = mysqli_fetch_array($query);
-		$sent_by = ($row['user_to'] == $userLoggedIn) ? "They said: " : "You said: ";
+		$sent_by = ($row['user_to'] == $userLoggedId) ? "They said: " : "You said: ";
 
 		//Timeframe
 		$date_time_now = date("Y-m-d H:i:s");
@@ -135,13 +137,14 @@ class Message {
 
 	public function getConvos() {
 		$userLoggedIn = $this->user_obj->getUsername();
+		$userLoggedId = $this->user_obj->getId();
 		$return_string = "";
 		$convos = array();
 
-		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedIn' OR user_from='$userLoggedIn' ORDER BY id DESC");
+		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedId' OR user_from='$userLoggedId' ORDER BY id DESC");
 
 		while($row = mysqli_fetch_array($query)) {
-			$user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
+			$user_to_push = ($row['user_to'] != $userLoggedId) ? $row['user_to'] : $row['user_from'];
 
 			if(!in_array($user_to_push, $convos)) {
 				array_push($convos, $user_to_push);
@@ -173,6 +176,7 @@ class Message {
 
 		$page = $data['page'];
 		$userLoggedIn = $this->user_obj->getUsername();
+		$userLoggedId = $this->user_obj->getId();
 		$return_string = "";
 		$convos = array();
 
@@ -181,12 +185,12 @@ class Message {
 		else 
 			$start = ($page - 1) * $limit;
 
-		$set_viewed_query = mysqli_query($this->con, "UPDATE messages SET viewed='yes' WHERE user_to='$userLoggedIn'");
+		$set_viewed_query = mysqli_query($this->con, "UPDATE messages SET viewed='yes' WHERE user_to='$userLoggedId'");
 
-		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedIn' OR user_from='$userLoggedIn' ORDER BY id DESC");
+		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedId' OR user_from='$userLoggedId' ORDER BY id DESC");
 
 		while($row = mysqli_fetch_array($query)) {
-			$user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
+			$user_to_push = ($row['user_to'] != $userLoggedId) ? $row['user_to'] : $row['user_from'];
 
 			if(!in_array($user_to_push, $convos)) {
 				array_push($convos, $user_to_push);
@@ -207,7 +211,7 @@ class Message {
 				$count++;
 
 
-			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages WHERE user_to='$userLoggedIn' AND user_from='$username' ORDER BY id DESC");
+			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages WHERE user_to='$userLoggedId' AND user_from='$username' ORDER BY id DESC");
 			$row = mysqli_fetch_array($is_unread_query);
 			$style = ($row['opened'] == 'no') ? "background-color: #DDEDFF;" : "";
 
@@ -238,12 +242,12 @@ class Message {
 
 		return $return_string;
 	}
-
 	public function getUnreadNumber() {
-		$userLoggedIn = $this->user_obj->getUsername();
-		$query = mysqli_query($this->con, "SELECT * FROM messages WHERE viewed='no' AND user_to='$userLoggedIn'");
+		$userLoggedId = $this->user_obj->getId();
+		$query = mysqli_query($this->con, "SELECT * FROM messages WHERE viewed='no' AND user_to='$userLoggedId'");
 		return mysqli_num_rows($query);
 	}
+
 
 }
 

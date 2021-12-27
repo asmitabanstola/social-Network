@@ -8,10 +8,10 @@ if(isset($_GET['u']))
 else {
 	$user_to = $message_obj->getMostRecentUser();
 	if($user_to == false)
-		$user_to = 'new';
+		$user_to = '';
 }
 
-if($user_to != "new")
+if($user_to != "")
 	$user_to_obj = new User($con, $user_to);
 
 if(isset($_POST['post_message'])) {
@@ -46,8 +46,8 @@ if(isset($_POST['post_message'])) {
 
 	<div class="main_column column" id="main_column">
 		<?php  
-		if($user_to != "new"){
-			echo "<h4>You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastName() . "</a></h4><hr><br>";
+		if($user_to != ""){
+			echo "<h4>You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastNameFromId() . "</a></h4><hr><br>";
 
 			echo "<div class='loaded_messages' id='scroll_messages'>";
 				echo $message_obj->getMessages($user_to);
@@ -63,7 +63,7 @@ if(isset($_POST['post_message'])) {
 		<div class="message_post">
 			<form action="" method="POST">
 				<?php
-				if($user_to == "new") {
+				if($user_to == "") {
 					echo "Select the friend you would like to message <br><br>";
 					?> 
 					To: <input type='text' onkeyup='getUser(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Name' autocomplete='off' id='seach_text_input'>
@@ -95,6 +95,6 @@ if(isset($_POST['post_message'])) {
 				<?php echo $message_obj->getConvos(); ?>
 			</div>
 			<br>
-			<a href="messages.php?u=new">New Message</a>
+			<a href="messages.php?u=">New Message</a>
 
 		</div>

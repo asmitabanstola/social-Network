@@ -12,6 +12,9 @@ class User {
 	public function getUsername() {
 		return $this->user['username'];
 	}
+	public function getId() {
+		return $this->user['id'];
+	}
 
 	public function getNumPosts() {
 		$username = $this->user['username'];
@@ -19,6 +22,13 @@ class User {
 		$row = mysqli_fetch_array($query);
 		return $row['num_posts'];
 	}
+	public function getFirstAndLastNameFromId() {
+		$id = $this->user['id'];
+		$query = mysqli_query($this->con, "SELECT first_name, last_name FROM users WHERE id='$id'");
+		$row = mysqli_fetch_array($query);
+		return $row['first_name'] . " " . $row['last_name'];
+	}
+
 
 	public function getFirstAndLastName() {
 		$username = $this->user['username'];
