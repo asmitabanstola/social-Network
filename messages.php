@@ -38,12 +38,12 @@ if(isset($_POST['post_message'])) {
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
-			echo "Likes: " . $user['num_likes'];
+			
 
 			?>
 		</div>
 	</div>
-
+	
 	<div class="main_column column" id="main_column">
 		<?php  
 		if($user_to != ""){
@@ -85,10 +85,7 @@ if(isset($_POST['post_message'])) {
 			var div = document.getElementById("scroll_messages");
 			div.scrollTop = div.scrollHeight;
 		</script>
-
-	</div>
-
-	<div class="user_details column" id="conversations">
+		<div class="user_details column" id="conversations">
 			<h4>Conversations</h4>
 
 			<div class="loaded_conversations">
@@ -98,3 +95,6 @@ if(isset($_POST['post_message'])) {
 			<a href="messages.php?u=">New Message</a>
 
 		</div>
+	</div>
+
+	

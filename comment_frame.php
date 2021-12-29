@@ -95,6 +95,8 @@ if (isset($_SESSION['username'])) {
 				$posted_by=$comment['posted_by'];
 				$date_added=$comment['date_added'];
 				$removed=$comment['removed'];
+				$p_by=mysqli_query($con,"SELECT username FROM users WHERE id='$posted_by' ");
+				$posted_by=implode("",mysqli_fetch_assoc($p_by));
 				//Timeframe
 							$date_time_now = date("Y-m-d H:i:s");
 							$start_date = new DateTime($date_added); //Time of post

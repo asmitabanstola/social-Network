@@ -27,12 +27,12 @@ if(isset($_POST['post'])){
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
-			echo "Likes: " . $user['num_likes'];
 
 			?>
 		</div>
 
 	</div>
+	
 
 	<div class="main_column column">
 		<form class="post_form" action="index.php" method="POST">
@@ -102,5 +102,9 @@ if(isset($_POST['post'])){
 	});
 
 	</script>
-
+<div class="user_details column" id="recommendations">
+			<h4>People You May Add</h4>
+			<br>
+			<iframe src='user_recommendation.php' ></iframe>
+		</div>
 </div>

@@ -190,21 +190,6 @@ textarea:focus{
 	background-color: none;
 }
 
-.comment_like{
-	background-color: transparent;
-	border:none;
-	font-size:14px;
-	color:#3498db;
-	padding:0;
-	height: auto;
-	width: auto;
-	margin:0;
-}
-.like_value{
-	font-size: 14px;
-	color: #000;
-	display: contents;
-}
 .profile_left{
 	top:30px;
 	width:17%;
@@ -446,4 +431,9 @@ textarea:focus{
 	left: 8px;
 	top:-5px;
 
+}
+#recommendations iframe{
+		border:0px;
+	width:250px;
+	background-color: #eee;
 }

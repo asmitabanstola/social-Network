@@ -30,7 +30,7 @@ class Post {
 			// }
 
 			//insert post 
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by', '$date_added', 'no', 'no', '0','1')");
+			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by', '$date_added', 'no', 'no')");
 			$returned_id = mysqli_insert_id($this->con);
 
 			//Insert notification 
@@ -220,7 +220,7 @@ class Post {
 
 								<div class='newsfeedPostOptions'>
 									Comments($comments_check_num)&nbsp;&nbsp;&nbsp;
-									<iframe src='like.php?post_id=$id' scrolling='no'></iframe>
+									<iframe src='rating.php?post_id=$id' scrolling='no'></iframe>
 								</div>
 
 							</div>
@@ -424,7 +424,7 @@ class Post {
 
 								<div class='newsfeedPostOptions'>
 									Comments($comments_check_num)&nbsp;&nbsp;&nbsp;
-									<iframe src='like.php?post_id=$id' scrolling='no'></iframe>
+									<iframe src='rating.php?post_id=$id' scrolling='no'></iframe>
 								</div>
 
 							</div>

@@ -1,6 +1,7 @@
 <?php
 	require'../../config/config.php';
 	session_start();
+	$userLoggedIn=$_SESSION['username'];
 	if(isset($_GET['post_id']))
 		$post_id=$_GET['post_id'];
 	if(isset($_POST['result'])){
