@@ -27,6 +27,7 @@ if(isset($_POST['post'])){
 			</a>
 			<br>
 			<?php echo "Posts: " . $user['num_posts']. "<br>"; 
+			echo "Likes:" . $user['num_likes']."<br>";
 
 			?>
 		</div>
@@ -102,9 +103,10 @@ if(isset($_POST['post'])){
 	});
 
 	</script>
-<div class="user_details column" id="recommendations">
+<div class="user_details column" id="recommendations" style="overflow: scroll; height:300px;">
 			<h4>People You May Add</h4>
 			<br>
-			<iframe src='user_recommendation.php' ></iframe>
+<!-- 			<iframe src='user_recommendation.php' ></iframe> -->
+<?php include("user_recommendation.php"); ?>
 		</div>
 </div>

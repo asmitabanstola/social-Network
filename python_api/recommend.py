@@ -1,4 +1,4 @@
-
+#!C:\Users\Dell\AppData\Local\Programs\Python\Python39\python.exe
 import numpy as np
 import pandas as pd
 import sklearn
@@ -20,11 +20,11 @@ n_ratings = len(ratings)
 n_posts = len(ratings['post_id'].unique())
 n_users = len(ratings['user_id'].unique())
 
-print(f"Number of ratings: {n_ratings}")
-print(f"Number of unique posts: {n_posts}")
-print(f"Number of unique users: {n_users}")
-print(f"Average ratings per user: {round(n_ratings / n_users, 2)}")
-print(f"Average ratings per post: {round(n_ratings / n_posts, 2)}")
+# print(f"Number of ratings: {n_ratings}")
+# print(f"Number of unique posts: {n_posts}")
+# print(f"Number of unique users: {n_users}")
+# print(f"Average ratings per user: {round(n_ratings / n_users, 2)}")
+# print(f"Average ratings per post: {round(n_ratings / n_posts, 2)}")
 
 user_freq = ratings[['user_id', 'post_id']].groupby('user_id').count().reset_index()
 user_freq.columns = ['user_id', 'n_ratings']
@@ -97,7 +97,7 @@ def find_similar_users(p_id, X, k, metric='cosine', show_distance=False):
     return neighbour_ids
 
 
-post_titles = dict(zip(posts['post_id'],posts['added_by']))
+post_titles = dict(zip(posts['post_id'], posts['added_by']))
 
 p_id = 78
 

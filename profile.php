@@ -59,6 +59,7 @@ textarea{
 		<a href="upload.php"><img src="<?php echo $user_array['profile_pic']; ?>"></a>
 		<div class="profile_info">
 			<p><?php echo "Posts: ".$user_array['num_posts'];?></p>
+				<p><?php echo "Likes: ".$user_array['num_likes'];?></p>
 			<p><?php echo "Friends: ".$num_friends;?></p>
 		</div>
 		<form action="<?php echo $username; ?>" method="POST">
@@ -91,6 +92,7 @@ textarea{
       echo '</div>';
     }
     ?>
+    <iframe src='rating.php?id=<?php echo $user_array['id']; ?>' scrolling="no" style="border: none; height: 50px;padding-left: 10px;"></iframe>
     <input type="submit" class="deep_blue" data-toggle="modal" data-target="#post_form" value="Post Something">
 </div>
 	<div class="profile_main_column column">

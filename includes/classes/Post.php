@@ -30,7 +30,7 @@ class Post {
 			// }
 
 			//insert post 
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by', '$date_added', 'no', 'no')");
+			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by', '$date_added', 'false', 'false')");
 			$returned_id = mysqli_insert_id($this->con);
 
 			//Insert notification 
@@ -56,7 +56,7 @@ class Post {
 
 
 		$str = ""; //String to return 
-		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' ORDER BY id DESC");
+		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='false' ORDER BY id DESC");
 
 		if(mysqli_num_rows($data_query) > 0) {
 
@@ -220,7 +220,7 @@ class Post {
 
 								<div class='newsfeedPostOptions'>
 									Comments($comments_check_num)&nbsp;&nbsp;&nbsp;
-									<iframe src='rating.php?post_id=$id' scrolling='no'></iframe>
+									<iframe src='like.php?post_id=$id' scrolling='no'></iframe>
 								</div>
 
 							</div>
@@ -281,7 +281,7 @@ class Post {
 
 
 		$str = ""; //String to return 
-		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='no' AND ((added_by='$userId'))  ORDER BY id DESC");
+		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='false' AND ((added_by='$userId'))  ORDER BY id DESC");
 		if(mysqli_num_rows($data_query) > 0) {
 
 
@@ -424,7 +424,7 @@ class Post {
 
 								<div class='newsfeedPostOptions'>
 									Comments($comments_check_num)&nbsp;&nbsp;&nbsp;
-									<iframe src='rating.php?post_id=$id' scrolling='no'></iframe>
+									<iframe src='like.php?post_id=$id' scrolling='no'></iframe>
 								</div>
 
 							</div>
