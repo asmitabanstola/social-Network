@@ -39,11 +39,9 @@ class Message {
 		$userLoggedIn = $this->user_obj->getUsername();
 		$userLoggedId = $this->user_obj->getId();
 		$data = "";
-		$oUser=mysqli_query($this->con,"SELECT id FROM users WHERE username='$otherUser'");
-		$ouser=implode("",mysqli_fetch_assoc($oUser));
-		$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to='$userLoggedId' AND user_from='$ouser'");
+		$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to='$userLoggedId' AND user_from='$otherUser'");
 
-		$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to='$userLoggedId' AND user_from='$ouser') OR (user_from='$userLoggedId' AND user_to='$ouser')");
+		$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to='$userLoggedId' AND user_from='$otherUser') OR (user_from='$userLoggedId' AND user_to='$otherUser')");
 
 		while($row = mysqli_fetch_array($get_messages_query)) {
 			$user_to = $row['user_to'];
@@ -152,9 +150,10 @@ class Message {
 		}
 
 		foreach($convos as $username) {
-			$user_found_obj = new User($this->con, $username);
+			$usname=mysqli_query($this->con,"SELECT username FROM users WHERE id=$username");
+			$us=implode("",mysqli_fetch_assoc($usname));
+			$user_found_obj = new User($this->con, $us);
 			$latest_message_details = $this->getLatestMessage($userLoggedIn, $username);
-
 			$dots = (strlen($latest_message_details[1]) >= 12) ? "..." : "";
 			$split = str_split($latest_message_details[1], 12);
 			$split = $split[0] . $dots; 
@@ -214,11 +213,10 @@ class Message {
 			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages WHERE user_to='$userLoggedId' AND user_from='$username' ORDER BY id DESC");
 			$row = mysqli_fetch_array($is_unread_query);
 			$style = ($row['opened'] == 'no') ? "background-color: #DDEDFF;" : "";
-
-
-			$user_found_obj = new User($this->con, $username);
+			$usname=mysqli_query($this->con,"SELECT username FROM users WHERE id=$username");
+			$us=implode("",mysqli_fetch_assoc($usname));
+			$user_found_obj = new User($this->con, $us);
 			$latest_message_details = $this->getLatestMessage($userLoggedIn, $username);
-
 			$dots = (strlen($latest_message_details[1]) >= 12) ? "..." : "";
 			$split = str_split($latest_message_details[1], 12);
 			$split = $split[0] . $dots; 

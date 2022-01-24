@@ -1,18 +1,14 @@
- <link rel="stylesheet" type="text/css" href="assets/CSS/style.css">
+<!--  <link rel="stylesheet" type="text/css" href="assets/CSS/style.css"> -->
+
 <style type="text/css">
 	 .profile_recommend{
 		width:200px;
-		float: left;
+		float: right;
+		position: relative;
 }
- .profile_recommend .profile_recommend_left_right{
+ .profile_recommend .profile_right{
 	display: inline-block;
 	position: relative;
-}
- .profile_recommend img{
-	height: 60px;
-	border-radius: 100%;
-	margin-right: 5px;
-
 }
  input[type="submit"]{
 	width: 100px;
@@ -21,10 +17,16 @@ input[type="submit"]:active{
 	padding:5px 4px 4px 5px ;
 	color:#ff2;
 }
+.tooltip img{
+	height: 50px; 
+	width: 50px;
+	border-radius: 100%;
+	 float: left;
+}
 .tooltip {
   position: relative;
   display: inline-block;
- 
+  opacity: 1;
 }
 
 .tooltip .tooltiptext {
@@ -39,7 +41,7 @@ input[type="submit"]:active{
   margin-left: -60px;
   /* Position the tooltip */
   position: absolute;
-  z-index: 1;
+ /* z-index: 1;*/
 }
 
 .tooltip:hover .tooltiptext {
@@ -48,7 +50,7 @@ input[type="submit"]:active{
 </style>
 <?php
 // session_start();
-// 	include("config/config.php");
+	include("config/config.php");
 	include("recommend.php");
 	// include("includes/classes/User.php");
 	$userLoggedId=$_SESSION['id'];
@@ -104,12 +106,13 @@ input[type="submit"]:active{
 				<img src="<?php echo $pname['profile_pic']; ?>">
 				<span class="tooltiptext"><?php echo $rating; ?></span>
 			</div>
-					<div class="profile_recommend_left_right">
+					<div class="profile_right">
 						<a href="" >
 						<?php 
 						echo $pname['first_name'] . " " . $pname['last_name'];
 			 			?>
 						</a>
+						<br/>
 					<?php
 						echo'<input  type="submit" name="add_friend" class="success" value="Add Friend"></br>';
 				}

@@ -2,7 +2,6 @@
 session_start();
 include("includes/header.php");
 $message_obj = new Message($con, $userLoggedIn);
-
 if(isset($_GET['u']))
 	$user_to = $_GET['u'];
 else {
@@ -12,7 +11,9 @@ else {
 }
 
 if($user_to != "")
-	$user_to_obj = new User($con, $user_to);
+	$uname=mysqli_query($con,"SELECT username FROM users WHERE id='$user_to'");
+	$us=implode("",mysqli_fetch_assoc($uname));
+	$user_to_obj = new User($con, $us);
 
 if(isset($_POST['post_message'])) {
 
@@ -47,7 +48,7 @@ if(isset($_POST['post_message'])) {
 	<div class="main_column column" id="main_column">
 		<?php  
 		if($user_to != ""){
-			echo "<h4>You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastNameFromId() . "</a></h4><hr><br>";
+			echo "<h4>You and <a href='$us'>" . $user_to_obj->getFirstAndLastName() . "</a></h4><hr><br>";
 
 			echo "<div class='loaded_messages' id='scroll_messages'>";
 				echo $message_obj->getMessages($user_to);
@@ -78,7 +79,7 @@ if(isset($_POST['post_message'])) {
 
 				?>
 			</form>
-
+			</div>
 		</div>
 		<script type="text/javascript" src="assets/JS/demo.js"></script>
 		<script>
@@ -95,6 +96,6 @@ if(isset($_POST['post_message'])) {
 			<a href="messages.php?u=">New Message</a>
 
 		</div>
-	</div>
+	
 
 	
