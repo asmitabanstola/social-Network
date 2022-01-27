@@ -58,6 +58,11 @@ input[type="submit"]:active{
 	$recommendation=array();
 	$peoples=mysqli_query($con,"SELECT * FROM ratings");
 	$matrix=array();
+		if(isset($_POST['add_friend'])){
+					$user= new User($con,$userLoggedIn);
+					$id=$_GET['id'];
+					$user->sendRequest($id);
+				}
 	while($people=mysqli_fetch_array($peoples)){
 		$users=mysqli_query($con,"SELECT username FROM users WHERE id={$people['user_id']}");
 		$username=mysqli_fetch_array($users);
@@ -77,10 +82,6 @@ input[type="submit"]:active{
 		<tr>
 			<td>
 				<?php
-				if(isset($_POST['add_friend'])){
-					$user= new User($con,$userLoggedIn);
-					$user->sendRequest($id);
-				}
 				 $name=mysqli_query($con,"SELECT * FROM users WHERE first_name='$people'");
 				 $pname=mysqli_fetch_array($name);
 				 $uname=$pname['username'];
@@ -107,16 +108,18 @@ input[type="submit"]:active{
 				<span class="tooltiptext"><?php echo $rating; ?></span>
 			</div>
 					<div class="profile_right">
-						<a href="" >
+						<a href="<?php echo $pname['username']; ?>" >
 						<?php 
 						echo $pname['first_name'] . " " . $pname['last_name'];
 			 			?>
 						</a>
 						<br/>
+						<form action="index.php?id=<?php echo $id; ?>" method="POST">
 					<?php
 						echo'<input  type="submit" name="add_friend" class="success" value="Add Friend"></br>';
 				}
 				?>
+			</form>
 					</div>
 				</div>
 					

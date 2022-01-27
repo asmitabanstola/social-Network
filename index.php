@@ -107,6 +107,6 @@ if(isset($_POST['post'])){
 			<h4>People You May Add</h4>
 			<br>
 <!-- 			<iframe src='user_recommendation.php' ></iframe> -->
-<?php include("user_recommendation.php"); ?>
+			<?php include 'user_recommendation.php'; ?>
 		</div>
 </div>

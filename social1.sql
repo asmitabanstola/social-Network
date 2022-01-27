@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2022 at 03:39 PM
+-- Generation Time: Jan 27, 2022 at 11:51 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `social1`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(2, 'admin', '0192023a7bbd73250516f069df18b500');
 
 -- --------------------------------------------------------
 
@@ -43,7 +62,9 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`id`, `post_body`, `posted_by`, `posted_to`, `date_added`, `removed`, `post_id`) VALUES
 (3, 'hello', 17, '17', '2021-12-22 08:58:16', 'no', 78),
-(4, 'Good ', 17, '18', '2021-12-28 05:24:03', 'no', 89);
+(4, 'Good ', 17, '18', '2021-12-28 05:24:03', 'no', 89),
+(5, 'nice', 18, '17', '2022-01-25 06:38:14', 'no', 98),
+(7, 'good', 18, '17', '2022-01-25 07:11:32', 'no', 90);
 
 -- --------------------------------------------------------
 
@@ -63,7 +84,17 @@ CREATE TABLE `friend_requests` (
 
 INSERT INTO `friend_requests` (`id`, `user_to`, `user_from`) VALUES
 (15, 3, 18),
-(16, 17, 32);
+(16, 17, 32),
+(26, 40, 18),
+(27, 39, 18),
+(28, 27, 18),
+(29, 12, 18),
+(30, 2, 18),
+(31, 29, 18),
+(32, 38, 18),
+(33, 34, 18),
+(34, 32, 18),
+(35, 30, 18);
 
 -- --------------------------------------------------------
 
@@ -84,7 +115,9 @@ CREATE TABLE `likes` (
 INSERT INTO `likes` (`id`, `user_id`, `post_id`) VALUES
 (1, 17, 89),
 (2, 11, 84),
-(3, 11, 90);
+(3, 11, 90),
+(4, 17, 88),
+(5, 17, 87);
 
 -- --------------------------------------------------------
 
@@ -109,7 +142,39 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `user_to`, `user_from`, `body`, `date`, `opened`, `viewed`, `deleted`) VALUES
 (12, 3, 17, 'Hello', '2021-12-15 13:02:12', 'no', 'yes', 'no'),
-(13, 3, 17, 'Hi', '2021-12-15 13:09:21', 'no', 'yes', 'no');
+(13, 3, 17, 'Hi', '2021-12-15 13:09:21', 'no', 'yes', 'no'),
+(16, 3, 17, 'hello', '2022-01-23 11:53:38', 'no', 'yes', 'no'),
+(23, 18, 17, 'hi', '2022-01-23 12:13:47', 'yes', 'yes', 'no'),
+(24, 18, 17, 'new message', '2022-01-23 12:21:42', 'yes', 'yes', 'no'),
+(25, 18, 17, 'new message', '2022-01-23 12:24:26', 'yes', 'yes', 'no'),
+(26, 18, 17, 'new message', '2022-01-23 12:24:54', 'yes', 'yes', 'no'),
+(27, 17, 18, 'hello', '2022-01-25 06:21:40', 'yes', 'yes', 'no');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `user_to` int(11) NOT NULL,
+  `user_from` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `link` varchar(100) NOT NULL,
+  `datetime` datetime NOT NULL,
+  `opened` varchar(3) NOT NULL,
+  `viewed` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `user_to`, `user_from`, `message`, `link`, `datetime`, `opened`, `viewed`) VALUES
+(2, 18, 17, 'Asmita Banstola liked your post', 'post.php?id=88', '2022-01-25 06:37:24', 'yes', 'yes'),
+(5, 18, 17, 'Asmita Banstola liked your post', 'post.php?id=87', '2022-01-25 07:04:17', 'yes', 'yes'),
+(7, 17, 18, 'Anjana Poudel commented on your post', 'post.php?id=90', '2022-01-25 07:11:32', 'yes', 'yes');
 
 -- --------------------------------------------------------
 
@@ -144,10 +209,11 @@ INSERT INTO `posts` (`id`, `body`, `added_by`, `date_added`, `likes`, `user_clos
 (84, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 17, '2021-12-27 13:03:52', 1, 'false', 'false'),
 (85, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:36', 0, 'false', 'false'),
 (86, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:40', 0, 'false', 'false'),
-(87, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:43', 0, 'false', 'false'),
-(88, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:47', 0, 'false', 'false'),
+(87, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:43', 1, 'false', 'false'),
+(88, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:47', 1, 'false', 'false'),
 (89, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:54', 1, 'false', 'false'),
-(90, 'This is a post', 17, '2021-12-28 03:42:36', 1, 'false', 'false');
+(90, 'This is a post', 17, '2021-12-28 03:42:36', 1, 'false', 'false'),
+(98, 'HTML determines the structure of web pages. This structure alone is not enough to make a web page look good and interactive. So you\'ll use assisted technologies such as CSS and JavaScript to make your HTML beautiful and add interactivity, respectively.', 17, '2022-01-25 06:36:59', 0, 'false', 'false');
 
 -- --------------------------------------------------------
 
@@ -422,7 +488,22 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (505, 18, 6, 3),
 (506, 37, 2, 3),
 (507, 2, 18, 5),
-(508, 2, 18, 5);
+(508, 2, 18, 5),
+(509, 44, 11, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `reported_by` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `post_of` int(11) NOT NULL,
+  `report_category` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -456,8 +537,8 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 (10, 'Ruja', 'Pradhan', 'ruja_pradhan_1_2_3', 'Ruja.prd@gamil.com', '7adfca2f2aba4cd301a02b9f33ca9037', '2021-10-30', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
 (11, 'Monica', 'Green', 'monica_green', 'Monica@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-10-30', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ',asmita_banstola,'),
 (12, 'Suja', 'Amatya', 'suja_amatya', 'Suja@gmail.com', 'e86fdc2283aff4717103f2d44d0610f7', '2021-11-02', 'assets/images/profile_pics/suja_amatya6c2544878d1e0071b6faca80074caf1cn.jpeg', 0, 0, 'no', ',asmita_banstola,'),
-(17, 'Asmita', 'Banstola', 'asmita_banstola', 'Asmi@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/asmita_banstola4303054b312a931d70b8787590e8890dn.jpeg', 8, 2, 'no', ',anjana_poudel,ruja_pradhan_1,puja_pradhan,suja_amatya,monica_green,'),
-(18, 'Anjana', 'Poudel', 'anjana_poudel', 'Anjana@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/defaults/b.png', 1, 1, 'no', ',asmita_banstola,'),
+(17, 'Asmita', 'Banstola', 'asmita_banstola', 'Asmi@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/asmita_banstola4303054b312a931d70b8787590e8890dn.jpeg', 9, 2, 'no', ',anjana_poudel,ruja_pradhan_1,puja_pradhan,suja_amatya,monica_green,'),
+(18, 'Anjana', 'Poudel', 'anjana_poudel', 'Anjana@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/defaults/b.png', 5, 3, 'no', ',asmita_banstola,'),
 (24, 'Sandhya', 'Rai', 'sandhya_rai', 'Sandhya12@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-02', 'assets/images/profile_pics/defaults/b.png', 1, 0, 'no', ','),
 (25, 'Sandhya', 'Rai', 'sandhya_rai_1', 'Sandy@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-06', 'assets/images/profile_pics/defaults/a.jpg', 1, 0, 'no', ','),
 (26, 'Riya', 'Aryal', 'riya_aryal', 'Riya@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-22', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
@@ -477,11 +558,18 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 (40, 'Sebastian ', 'Warner', 'sebastian_warner', 'Sebastian@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-24', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
 (41, 'Sacha', ' lawson', 'sacha_ lawson', 'Sacha@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-24', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
 (42, 'Sade', ' chen', 'sade_ chen', 'Sade@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-24', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
-(43, 'Alex', 'Rai', 'alex_rai', 'Alex@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-03', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ',');
+(43, 'Alex', 'Rai', 'alex_rai', 'Alex@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-03', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
+(44, 'Suhana', 'Kc', 'suhana_kc', 'Suhana@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-26', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ',');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `comments`
@@ -516,6 +604,14 @@ ALTER TABLE `messages`
   ADD KEY `messages_ibfk_2` (`user_from`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_to` (`user_to`),
+  ADD KEY `user_from` (`user_from`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -531,6 +627,15 @@ ALTER TABLE `ratings`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reports_ibfk_1` (`post_id`),
+  ADD KEY `reported_by` (`reported_by`),
+  ADD KEY `post_of` (`post_of`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -541,46 +646,64 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `friend_requests`
 --
 ALTER TABLE `friend_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=509;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=510;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Constraints for dumped tables
@@ -615,6 +738,13 @@ ALTER TABLE `messages`
   ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`user_from`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_to`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`user_from`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
@@ -626,6 +756,14 @@ ALTER TABLE `posts`
 ALTER TABLE `ratings`
   ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`profile_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`reported_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`post_of`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

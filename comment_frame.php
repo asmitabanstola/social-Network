@@ -3,9 +3,11 @@ session_start();
 require 'config/config.php';
 include("includes/classes/User.php");
 include("includes/classes/Post.php");
+include("includes/classes/Notification.php");
 if (isset($_SESSION['username'])) {
- 	$userLoggedIn = $_SESSION['id'];
- 	$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username = '$userLoggedIn'");
+ 	$userLoggedId = $_SESSION['id'];
+ 	$userLoggedIn = $_SESSION['username'];
+ 	$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE id = '$userLoggedId'");
  	$user = mysqli_fetch_array($user_details_query);
  }
  else{
@@ -74,7 +76,28 @@ if (isset($_SESSION['username'])) {
 		$post_body=$_POST['post_body'];
 		$post_body=mysqli_escape_string($con,$post_body);
 		$date_time_now=date("Y-m-d H:i:s");
-		$insert_post=mysqli_query($con,"INSERT INTO comments VALUES('','$post_body','$userLoggedIn','$posted_to','$date_time_now','no','$post_id')");
+		$insert_post=mysqli_query($con,"INSERT INTO comments VALUES('','$post_body','$userLoggedId','$posted_to','$date_time_now','no','$post_id')");
+		if($posted_to != $userLoggedId) {
+			$notification = new Notification($con, $userLoggedIn);
+			$notification->insertNotification($post_id, $posted_to, "comment");
+		}
+
+		$get_commenters = mysqli_query($con, "SELECT * FROM comments WHERE post_id='$post_id'");
+		$notified_users = array();
+		while($row = mysqli_fetch_array($get_commenters)) {
+
+			if($row['posted_by'] != $posted_to
+				&& $row['posted_by'] != $userLoggedId && !in_array($row['posted_by'], $notified_users)) {
+
+				$notification = new Notification($con, $userLoggedIn);
+				$notification->insertNotification($post_id, $row['posted_by'], "comment_non_owner");
+
+				array_push($notified_users, $row['posted_by']);
+			}
+
+		}
+
+
 		echo"<p> Comment Posted!</p>";
 	}
 ?>

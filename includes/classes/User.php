@@ -28,7 +28,11 @@ class User {
 		$row = mysqli_fetch_array($query);
 		return $row['first_name'] . " " . $row['last_name'];
 	}
-
+	public function getNumberOfFriendRequests() {
+		$id = $this->user['id'];
+		$query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE user_to='$id'");
+		return mysqli_num_rows($query);
+	}
 
 	public function getFirstAndLastName() {
 		$username = $this->user['username'];
