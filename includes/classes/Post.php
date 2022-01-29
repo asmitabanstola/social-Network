@@ -39,7 +39,7 @@ class Post {
 		$page = $data['page']; 
 		
 		$userLoggedIn = $this->user_obj->getUsername();
-
+		$userLoggedId = $this->user_obj->getId();
 		if($page == 1) 
 			$start = 0;
 		else 
@@ -62,17 +62,6 @@ class Post {
 				$added_by2=mysqli_query($this->con,"SELECT username from users where id='$added_by1'");
 				$added_by=implode("", mysqli_fetch_assoc($added_by2));
 				$date_time = $row['date_added'];
-
-				//Prepare user_to string so it can be included even if not posted to a user
-				// if($row['user_to'] == "") {
-				// 	$user_to = "";
-				// }
-				// else {
-				// 	$user_to_obj = new User($this->con, $row['user_to']);
-				// 	$user_to_name = $user_to_obj->getFirstAndLastName();
-				// 	$user_to = "to <a href='" . $row['user_to'] ."'>" . $user_to_name . "</a>";
-				// }
-
 				//Check if user who posted, has their account closed
 				$added_by_obj = new User($this->con, $added_by);
 				if($added_by_obj->isClosed()) {
@@ -99,7 +88,10 @@ class Post {
 					else 
 						$delete_button = "";
 
-
+					if($userLoggedId!=$added_by1 ){
+						$report_button="<button class='report_button btn-primary' id='report$id'>Report</button>";
+					}else
+						$report_button="";
 					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
 					$first_name = $user_row['first_name'];
@@ -218,6 +210,7 @@ class Post {
 							<div class='post_comment' id='toggleComment$id' style='display:none;'>
 								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
 							</div>
+							$report_button
 							<hr>";
 				}
 
@@ -236,9 +229,19 @@ class Post {
 
 							});
 						});
+						$('#report<?php echo $id; ?>').on('click', function() {
+							bootbox.confirm("Are you sure you want to report this post?", function(result) {
 
+								$.post("includes/form_handler/report_post.php?post_id=<?php echo $id; ?>", {result:result});
 
-					});
+								if(result)
+									location.reload();
+
+							});
+						});
+
+						});
+
 
 				</script>
 				<?php

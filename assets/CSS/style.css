@@ -376,8 +376,10 @@ textarea:focus{
 	float: left;
 }
 #grey{
-	color: #BCBCBC;
-
+	color: #000;
+	line-height: 7px;
+	padding-bottom: 5px;
+	padding-left: 30px;
 }
 .resultDisplay{
 	padding: 5px 5px 0 5px;
@@ -498,6 +500,7 @@ textarea:focus{
     background-color: transparent;
     color: #1E96CA;
     padding: 10px;
+    height: 80px;
 }
 
 .search_results_footer{
@@ -512,10 +515,9 @@ textarea:focus{
 .search_results_footer a {
 	color: #fff;
 }
-
 .search_result {
 	padding: 10px;
-    height: 100px;
+    height: 80px;
 }
 
 .searchPageFriendButtons {
@@ -537,6 +539,40 @@ textarea:focus{
 #search_hr {
 	margin-bottom: 0px;
 }
+.report_button{
+	margin-left: 600px;
+    margin-top: 0px;
+}
+.small_profile_pic {
+	height: 55px;
+    margin: 1px 12px 0 2px;
+    float: left;
+}
+
+#settings_input {
+	border: 1px solid #ccc;
+    height: 20px;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.settings_submit {
+	border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
 
 
 

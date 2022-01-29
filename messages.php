@@ -10,10 +10,10 @@ else {
 		$user_to = '';
 }
 
-if($user_to != "")
-	$uname=mysqli_query($con,"SELECT username FROM users WHERE id='$user_to'");
-	$us=implode("",mysqli_fetch_assoc($uname));
-	$user_to_obj = new User($con, $us);
+// if($user_to != "")
+// 	$uname=mysqli_query($con,"SELECT username FROM users WHERE id='$user_to'");
+// 	$us=implode("",mysqli_fetch_assoc($uname));
+// 	$user_to_obj = new User($con, $us);
 
 if(isset($_POST['post_message'])) {
 
@@ -48,6 +48,9 @@ if(isset($_POST['post_message'])) {
 	<div class="main_column column" id="main_column">
 		<?php  
 		if($user_to != ""){
+				$uname=mysqli_query($con,"SELECT username FROM users WHERE id='$user_to'");
+				$us=implode("",mysqli_fetch_assoc($uname));
+                $user_to_obj = new User($con, $us);
 			echo "<h4>You and <a href='$us'>" . $user_to_obj->getFirstAndLastName() . "</a></h4><hr><br>";
 
 			echo "<div class='loaded_messages' id='scroll_messages'>";
@@ -62,7 +65,7 @@ if(isset($_POST['post_message'])) {
 
 
 		<div class="message_post">
-			<form action="" method="POST">
+			<form action="message.php?u=<?php echo $user_to; ?>" method="POST">
 				<?php
 				if($user_to == "") {
 					echo "Select the friend you would like to message <br><br>";

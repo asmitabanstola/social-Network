@@ -100,7 +100,7 @@ if (isset($_SESSION['username'])) {
         ?>
   	</a>
 
-  	<a href="#">
+  	<a href="settings.php">
   		<i class="fa fa-wrench fa-lg"></i>
   	</a>
 

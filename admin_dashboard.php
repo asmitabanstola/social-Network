@@ -13,71 +13,57 @@ if(isset($_SESSION['username'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
     <title>Dashboard</title>
+
     <!-- Bootstrap core CSS -->
-    <link  rel="stylesheet" type="text/css"href="assets/CSS/bootstrap.css">
-    <script src="assets/JS/jquery.min.js"></script>
+    <link href="assets/CSS/bootstrap.min.css" rel="stylesheet">
+    <script src="assets/JS/jquery-3.3.1.slim.min.js"></script>
   <script src="assets/JS/bootstrap.min.js" ></script>
-  <link rel="stylesheet" type="text/css" href="font/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="assets/CSS/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome.css">
+    <link href="assets/CSS/dashboard.css" rel="stylesheet">
   </head>
   <body>
-  <div class="sidebar">
-  <a class="" href="admin_dashboard.php">Dashboard</a>
-</div>
-   <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Virtually</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="register.php"><span class="glyphicon glyphicon-log-out"></span>Sign Out</a></li>
-    </ul>
-</div>
-  </div>
-</nav>
-<style>
-  .section {
-  border: 1px solid #ccc;
-  display: flex;
-  flex-direction: row;
-  font-family: sans-serif;
- 
-}
-img{
-  width:400px;
-}
-.paragraph {
-  color: #555;
-  display: flex;
-  flex-direction: column;
-}
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Virtually</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="index.php">Sign out</a>
+        </li>
+      </ul>
+    </nav>
 
-.content {
-  padding: 20px;
-}
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span class="fa fa-file"></span>
+                  Dashboard
+                </a>
+              </li>
+             
+            </ul>
 
-.title {
-  font-size: 24px;
-  color: #222;
-  line-height: 24px;
-}
-@media screen and (max-width:860px){
-.section img.image{
-    height:300px;
-    width:350px;
-  }
-  .title {
-  font-size: 20px;
-  color: #222;
-  line-height: 18px;
-}
-.content{
-  padding-top:0px;
-}
-}
-</style>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+           <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="#">Admin</a></li> 
+      </ol>
+        </nav>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 class="h2">Reported Posts</h1>
+            <!-- <button class="btn btn-primary">Add company</button> -->
+          </div>
 <div class="main">
 <!-- Portfolio Gallery Grid -->
        <table border="1px" class="table">
@@ -94,12 +80,16 @@ img{
 <tbody>
   <?php
     include('config/config.php');
-    $sql = "select * from reports'";
-    $query=mysqli_query($con,$sql);
+    $i=1;
+    $query=mysqli_query($con,"SELECT * FROM reports");
+    if(mysqli_num_rows($query)>0){
     while($row=mysqli_fetch_array($query)){
-      $reported_by=mysqli_query($con,"SELECT first_name FROM users WHERE id=$row['reported_by']");
-      $post=mysqli_query($con,"SELECT body FROM posts WHERE id=$row['post_id']");
-      $posted_by=mysqli_query($con,"SELECT first_name FROM users WHERE id=$row['post_of']");
+      $reported_by1=mysqli_query($con,"SELECT first_name FROM users WHERE id={$row['reported_by']}");
+      $reported_by=implode("", mysqli_fetch_assoc($reported_by1));
+      $post1=mysqli_query($con,"SELECT body FROM posts WHERE id={$row['post_id']}");
+       $post=implode("", mysqli_fetch_assoc($post1));
+      $posted_by1=mysqli_query($con,"SELECT first_name FROM users WHERE id={$row['post_of']}");
+       $posted_by=implode("", mysqli_fetch_assoc($posted_by1));
       ?>
     <tr>
       <td><?php echo $i; ?></td>
@@ -107,14 +97,20 @@ img{
       <td><?php echo $post; ?></td>
       <td><?php echo $posted_by; ?></td>
       <td><?php echo $row['report_category']; ?></td>
-      <td><a href="#"><button class="btn btn-primary">KEEP</button></a>  <a href="form_handler/delete_post.php?delete=<?php echo $row['post_id'];?>" onclick=" return confirm('Are you sure you want to delete this post?')"><button class="btn btn-primary">DISCARD </button></a></td>
+      <td><a href="#"><button class="btn btn-primary">KEEP</button></a>  <a href="form_handler/delete_post.php?delete=<?php echo $row['post_id'];?>" onclick=" return confirm('Are you sure you want to delete this post?')"><br><button class="btn btn-danger">DISCARD </button></a></td>
       </tr>
     </tr>
     <?php
       $i++;
-     } ?>
+     } 
+   ?>
+
 </tbody>
 </table>
+<?php }else{
+?>
+<h6>No Reported Post yet!!</h6>
+<?php } ?>
       </div>
      
 </body>

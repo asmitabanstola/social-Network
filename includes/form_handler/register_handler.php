@@ -113,8 +113,8 @@ if($rand == 1)
 	 $query = mysqli_query($con, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
 	 $id = mysqli_insert_id($con); //number
 	$_SESSION['id'] =$id;
-
-	 array_push($error_array, "<span style = 'color: #ddd;'>You are all set!Go ahead and Login! </span><br>");
+	$result=mysqli_query($con,"INSERT INTO ratings VALUES ('',$id,'27',3)");
+	 array_push($error_array, "You are all set!Go ahead and Login!");
 
 	 //clear session
 	 $_SESSION['reg_fname'] = "";

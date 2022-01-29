@@ -73,12 +73,14 @@ input[type="submit"]:active{
 	// echo"<pre>";
 	// print_r($matrix);
 	// echo "</pre>";
+	?>
+	<table>
+	<?php
 	$users=mysqli_query($con,"SELECT username FROM users WHERE id=$userLoggedId");
 	$username=mysqli_fetch_array($users);
 	$recommenation=getRecommendation($matrix,$username['username']);
 	foreach ($recommenation as $people=>$rating) {
 		?>
-		<table>
 		<tr>
 			<td>
 				<?php
@@ -116,7 +118,7 @@ input[type="submit"]:active{
 						<br/>
 						<form action="index.php?id=<?php echo $id; ?>" method="POST">
 					<?php
-						echo'<input  type="submit" name="add_friend" class="success" value="Add Friend"></br>';
+						echo'<input  type="submit" name="add_friend" id="addfriend" class="success" value="Add Friend"></br>';
 				}
 				?>
 			</form>
@@ -125,9 +127,8 @@ input[type="submit"]:active{
 					
 			 </td>
 		</tr>
-		</table>
-		<hr>
 		<?php
 	}
 }
 ?>
+</table>

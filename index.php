@@ -2,18 +2,13 @@
 session_start();
 if(!isset($_SESSION['log_email'])){
 header('location:register.php');
-}else{
-  
+}else{ 
 include("includes/header.php");
-
-
-
 if(isset($_POST['post'])){
 	$post = new Post($con, $userLoggedIn);
 	$post->submitPost($_POST['post_text'], 'none');
 }
 }
-
  ?>
 	<div class="user_details column">
 		<a href="<?php echo $userLoggedIn; ?>">  <img src="<?php echo $user['profile_pic']; ?>"> </a>
@@ -106,7 +101,8 @@ if(isset($_POST['post'])){
 <div class="user_details column" id="recommendations" style="overflow: scroll; height:300px;">
 			<h4>People You May Add</h4>
 			<br>
-<!-- 			<iframe src='user_recommendation.php' ></iframe> -->
-			<?php include 'user_recommendation.php'; ?>
+			<?php 
+			include 'user_recommendation.php';
+			 ?> 
 		</div>
 </div>
