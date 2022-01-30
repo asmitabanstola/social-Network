@@ -65,7 +65,7 @@ if(isset($_POST['post_message'])) {
 
 
 		<div class="message_post">
-			<form action="message.php?u=<?php echo $user_to; ?>" method="POST">
+			<form action="messages.php?u=<?php echo $user_to; ?>" method="POST">
 				<?php
 				if($user_to == "") {
 					echo "Select the friend you would like to message <br><br>";

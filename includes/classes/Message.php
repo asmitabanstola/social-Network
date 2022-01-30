@@ -78,18 +78,18 @@ class Message {
 				$days = " ago";
 			}
 			else if($interval->d == 1) {
-				$days = $interval->d . " day ago";
+				$days = $interval->d . " d ago";
 			}
 			else {
-				$days = $interval->d . " days ago";
+				$days = $interval->d . " d's ago";
 			}
 
 
 			if($interval->m == 1) {
-				$time_message = $interval->m . " month". $days;
+				$time_message = $interval->m . " m". $days;
 			}
 			else {
-				$time_message = $interval->m . " months". $days;
+				$time_message = $interval->m . " m's". $days;
 			}
 
 		}
@@ -98,23 +98,23 @@ class Message {
 				$time_message = "Yesterday";
 			}
 			else {
-				$time_message = $interval->d . " days ago";
+				$time_message = $interval->d . " d's ago";
 			}
 		}
 		else if($interval->h >= 1) {
 			if($interval->h == 1) {
-				$time_message = $interval->h . " hour ago";
+				$time_message = $interval->h . " h ago";
 			}
 			else {
-				$time_message = $interval->h . " hours ago";
+				$time_message = $interval->h . " h's ago";
 			}
 		}
 		else if($interval->i >= 1) {
 			if($interval->i == 1) {
-				$time_message = $interval->i . " minute ago";
+				$time_message = $interval->i . " min ago";
 			}
 			else {
-				$time_message = $interval->i . " minutes ago";
+				$time_message = $interval->i . " min's ago";
 			}
 		}
 		else {

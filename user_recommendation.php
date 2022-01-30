@@ -58,6 +58,7 @@ input[type="submit"]:active{
 	$recommendation=array();
 	$peoples=mysqli_query($con,"SELECT * FROM ratings");
 	$matrix=array();
+	//Sent Request if add friend is clicked
 		if(isset($_POST['add_friend'])){
 					$user= new User($con,$userLoggedIn);
 					$id=$_GET['id'];
@@ -70,9 +71,6 @@ input[type="submit"]:active{
 		$profile_name=mysqli_fetch_array($profilename);
 		$matrix[$username['username']][$profile_name['first_name']]=$people['rating'];
 	}
-	// echo"<pre>";
-	// print_r($matrix);
-	// echo "</pre>";
 	?>
 	<table>
 	<?php

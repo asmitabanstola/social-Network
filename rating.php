@@ -27,11 +27,13 @@
 		$num_rows=mysqli_num_rows($check_query);
 	if($num_rows>0){
 		$rating=implode("",mysqli_fetch_assoc($check_query));
+		//reting display in profile
 		echo'<form action="rating.php?id='.$profile_id.'" method="POST">'.
 		'<div class="rated_value"style="display:contents;color:#fff;">'. $rating .' Rating
 		</div>
 		</form>';
 	}else{
+		//if not previously rated
 		echo'<form action="rating.php?id='.$profile_id.'" method="POST">
 		<input type="number" name="rating" id="rating">
 		<input type="submit" class="comment_rate" name="rating_button" value="Rate">

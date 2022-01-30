@@ -1,5 +1,5 @@
 <?php
-
+//similarity distance
 function similarity_distance($matrix,$person1,$person2){
 	$similar=array();
 	$sum=0;
@@ -13,6 +13,7 @@ function similarity_distance($matrix,$person1,$person2){
 		}
 		foreach($matrix[$person1] as $key=>$value){
 		if(array_key_exists($key,$matrix[$person2])){
+			//Euclidean distance
 			$sum=$sum+pow($value-$matrix[$person2][$key],2);
 		}
 	}
@@ -31,6 +32,7 @@ function getRecommendation($matrix,$person){
 					if(!array_key_exists($key,$total)){
 						$total[$key]=0;
 					}
+					//predict similarity
 					$total[$key]+=$matrix[$otherPerson][$key]*$sim;
 					if(!array_key_exists($key,$simsums)){
 						$simsums[$key]=0;

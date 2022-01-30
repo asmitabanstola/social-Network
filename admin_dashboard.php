@@ -97,7 +97,7 @@ if(isset($_SESSION['username'])){
       <td><?php echo $post; ?></td>
       <td><?php echo $posted_by; ?></td>
       <td><?php echo $row['report_category']; ?></td>
-      <td><a href="#"><button class="btn btn-primary">KEEP</button></a>  <a href="form_handler/delete_post.php?delete=<?php echo $row['post_id'];?>" onclick=" return confirm('Are you sure you want to delete this post?')"><br><button class="btn btn-danger">DISCARD </button></a></td>
+      <td><a href="#"><button class="btn btn-primary">KEEP</button></a>  <a href="includes/form_handler/delete_report_post.php?post_id=<?php echo $row['post_id'];?>" onclick=" return confirm('Are you sure you want to delete this post?')"><br><button class="btn btn-danger">DELETE</button></a></td>
       </tr>
     </tr>
     <?php
