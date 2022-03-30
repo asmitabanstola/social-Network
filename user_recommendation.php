@@ -27,6 +27,7 @@ input[type="submit"]:active{
   position: relative;
   display: inline-block;
   opacity: 1;
+   z-index: 0;
 }
 
 .tooltip .tooltiptext {
@@ -41,7 +42,6 @@ input[type="submit"]:active{
   margin-left: -60px;
   /* Position the tooltip */
   position: absolute;
- /* z-index: 1;*/
 }
 
 .tooltip:hover .tooltiptext {
@@ -56,33 +56,34 @@ input[type="submit"]:active{
 	$userLoggedId=$_SESSION['id'];
 	$userLoggedIn=$_SESSION['username'];
 	$recommendation=array();
-	$peoples=mysqli_query($con,"SELECT * FROM ratings");
-	$matrix=array();
+	$result=mysqli_query($con,"SELECT * FROM ratings");
+	$rating_matrix=array();
 	//Sent Request if add friend is clicked
 		if(isset($_POST['add_friend'])){
 					$user= new User($con,$userLoggedIn);
 					$id=$_GET['id'];
 					$user->sendRequest($id);
 				}
-	while($people=mysqli_fetch_array($peoples)){
-		$users=mysqli_query($con,"SELECT username FROM users WHERE id={$people['user_id']}");
+	while($a=mysqli_fetch_array($result)){
+		$users=mysqli_query($con,"SELECT username FROM users WHERE id={$a['user_id']}");
 		$username=mysqli_fetch_array($users);
-		$profilename=mysqli_query($con,"SELECT first_name FROM users WHERE id={$people['profile_id']}");
+		$profilename=mysqli_query($con,"SELECT first_name FROM users WHERE id={$a['profile_id']}");
 		$profile_name=mysqli_fetch_array($profilename);
-		$matrix[$username['username']][$profile_name['first_name']]=$people['rating'];
+		//Rating matrix
+		$rating_matrix[$username['username']][$profile_name['first_name']]=$a['rating'];
 	}
 	?>
 	<table>
 	<?php
 	$users=mysqli_query($con,"SELECT username FROM users WHERE id=$userLoggedId");
 	$username=mysqli_fetch_array($users);
-	$recommenation=getRecommendation($matrix,$username['username']);
-	foreach ($recommenation as $people=>$rating) {
+	$recommenation=getRecommendation($rating_matrix,$username['username']);
+	foreach ($recommenation as $a=>$rating) {
 		?>
 		<tr>
 			<td>
 				<?php
-				 $name=mysqli_query($con,"SELECT * FROM users WHERE first_name='$people'");
+				 $name=mysqli_query($con,"SELECT * FROM users WHERE first_name='$a'");
 				 $pname=mysqli_fetch_array($name);
 				 $uname=$pname['username'];
 				 $id=$pname['id'];

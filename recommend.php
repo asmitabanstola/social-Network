@@ -1,43 +1,43 @@
 <?php
 //similarity distance
-function similarity_distance($matrix,$person1,$person2){
+function similarity_distance($rating_matrix,$X,$Y){
 	$similar=array();
 	$sum=0;
-	foreach($matrix[$person1] as $key=>$value){
-		if(array_key_exists($key,$matrix[$person2])){
+	foreach($rating_matrix[$X] as $key=>$value){
+		if(array_key_exists($key,$rating_matrix[$Y])){
 			$similar[$key]=1;
 		}
 	}
 		if($similar==0){
 			return 0;
 		}
-		foreach($matrix[$person1] as $key=>$value){
-		if(array_key_exists($key,$matrix[$person2])){
+		foreach($rating_matrix[$X] as $key=>$value){
+		if(array_key_exists($key,$rating_matrix[$Y])){
 			//Euclidean distance
-			$sum=$sum+pow($value-$matrix[$person2][$key],2);
+			$sum=$sum+pow($value-$rating_matrix[$Y][$key],2);
 		}
 	}
 	return 1/(1+sqrt($sum));
 }
 
-function getRecommendation($matrix,$person){
+function getRecommendation($rating_matrix,$Z){
 	$total=array();
-	$simsums=array();
-	$ranks=array();
-	foreach ($matrix as $otherPerson=>$value){
-		if($otherPerson!=$person){
-			$sim=similarity_distance($matrix,$person,$otherPerson);
-			foreach($matrix[$otherPerson] as $key=>$value){
-				if(!array_key_exists($key,$matrix[$person])){
+	$totalsimilarity=array();
+	$order=array();
+	foreach ($rating_matrix as $W=>$value){
+		if($W!=$Z){
+			$sim=similarity_distance($rating_matrix,$Z,$W);
+			foreach($rating_matrix[$W] as $key=>$value){
+				if(!array_key_exists($key,$rating_matrix[$Z])){
 					if(!array_key_exists($key,$total)){
 						$total[$key]=0;
 					}
 					//predict similarity
-					$total[$key]+=$matrix[$otherPerson][$key]*$sim;
-					if(!array_key_exists($key,$simsums)){
-						$simsums[$key]=0;
+					$total[$key]+=$rating_matrix[$W][$key]*$sim;
+					if(!array_key_exists($key,$totalsimilarity)){
+						$totalsimilarity[$key]=0;
 					}
-					$simsums[$key]+=$sim;
+					$totalsimilarity[$key]+=$sim;
 				}
 			}
 
@@ -45,10 +45,11 @@ function getRecommendation($matrix,$person){
 	}
 	
 	foreach($total as $key=>$value){
-		$ranks[$key]=$value/$simsums[$key];
+		//Normalization 
+		$order[$key]=$value/$totalsimilarity[$key];
 		
 	}
-	array_multisort($ranks,SORT_DESC);
-		return $ranks;
+	array_multisort($order,SORT_DESC);
+		return $order;
 }
 ?>

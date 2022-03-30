@@ -98,7 +98,7 @@ if(isset($_POST['post'])){
 	});
 
 	</script>
-	//Algorithm initiation
+<!-- 	Algorithm initiation -->
 <div class="user_details column" id="recommendations" style="overflow: scroll; height:300px;">
 			<h4>People You May Add</h4>
 			<br>

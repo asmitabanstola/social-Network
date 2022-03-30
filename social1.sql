@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2022 at 11:51 AM
+-- Generation Time: Mar 27, 2022 at 08:23 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -63,8 +63,8 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `post_body`, `posted_by`, `posted_to`, `date_added`, `removed`, `post_id`) VALUES
 (3, 'hello', 17, '17', '2021-12-22 08:58:16', 'no', 78),
 (4, 'Good ', 17, '18', '2021-12-28 05:24:03', 'no', 89),
-(5, 'nice', 18, '17', '2022-01-25 06:38:14', 'no', 98),
-(7, 'good', 18, '17', '2022-01-25 07:11:32', 'no', 90);
+(8, 'good', 11, '17', '2022-01-30 03:22:03', 'no', 103),
+(9, 'nice\r\n', 17, '11', '2022-03-22 02:38:57', 'no', 105);
 
 -- --------------------------------------------------------
 
@@ -88,13 +88,13 @@ INSERT INTO `friend_requests` (`id`, `user_to`, `user_from`) VALUES
 (26, 40, 18),
 (27, 39, 18),
 (28, 27, 18),
-(29, 12, 18),
 (30, 2, 18),
 (31, 29, 18),
 (32, 38, 18),
 (33, 34, 18),
-(34, 32, 18),
-(35, 30, 18);
+(35, 30, 18),
+(40, 2, 12),
+(42, 40, 11);
 
 -- --------------------------------------------------------
 
@@ -115,9 +115,10 @@ CREATE TABLE `likes` (
 INSERT INTO `likes` (`id`, `user_id`, `post_id`) VALUES
 (1, 17, 89),
 (2, 11, 84),
-(3, 11, 90),
 (4, 17, 88),
-(5, 17, 87);
+(5, 17, 87),
+(9, 11, 103),
+(10, 17, 105);
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,13 @@ INSERT INTO `messages` (`id`, `user_to`, `user_from`, `body`, `date`, `opened`, 
 (24, 18, 17, 'new message', '2022-01-23 12:21:42', 'yes', 'yes', 'no'),
 (25, 18, 17, 'new message', '2022-01-23 12:24:26', 'yes', 'yes', 'no'),
 (26, 18, 17, 'new message', '2022-01-23 12:24:54', 'yes', 'yes', 'no'),
-(27, 17, 18, 'hello', '2022-01-25 06:21:40', 'yes', 'yes', 'no');
+(27, 17, 18, 'hello', '2022-01-25 06:21:40', 'yes', 'yes', 'no'),
+(28, 17, 11, 'hello', '2022-01-27 12:04:05', 'yes', 'yes', 'no'),
+(29, 11, 17, 'hi', '2022-01-27 12:04:35', 'yes', 'yes', 'no'),
+(30, 18, 17, 'hi', '2022-01-30 02:46:50', 'no', 'yes', 'no'),
+(31, 17, 12, 'Hi', '2022-01-30 06:26:06', 'no', 'yes', 'no'),
+(32, 11, 12, 'hello', '2022-01-30 06:28:21', 'yes', 'yes', 'no'),
+(33, 11, 17, 'hello', '2022-03-22 02:39:11', 'yes', 'yes', 'no');
 
 -- --------------------------------------------------------
 
@@ -174,7 +181,13 @@ CREATE TABLE `notifications` (
 INSERT INTO `notifications` (`id`, `user_to`, `user_from`, `message`, `link`, `datetime`, `opened`, `viewed`) VALUES
 (2, 18, 17, 'Asmita Banstola liked your post', 'post.php?id=88', '2022-01-25 06:37:24', 'yes', 'yes'),
 (5, 18, 17, 'Asmita Banstola liked your post', 'post.php?id=87', '2022-01-25 07:04:17', 'yes', 'yes'),
-(7, 17, 18, 'Anjana Poudel commented on your post', 'post.php?id=90', '2022-01-25 07:11:32', 'yes', 'yes');
+(7, 17, 18, 'Anjana Poudel commented on your post', 'post.php?id=90', '2022-01-25 07:11:32', 'yes', 'yes'),
+(8, 17, 18, 'Anjana Poudel liked your post', 'post.php?id=90', '2022-01-29 09:22:37', 'no', 'yes'),
+(9, 17, 11, 'Monica Green liked your post', 'post.php?id=103', '2022-01-30 03:21:57', 'no', 'yes'),
+(10, 17, 11, 'Monica Green commented on your post', 'post.php?id=103', '2022-01-30 03:22:03', 'no', 'yes'),
+(11, 17, 11, 'Monica Green liked your post', 'post.php?id=103', '2022-01-31 07:51:26', 'no', 'yes'),
+(12, 11, 17, 'Asmita Banstola liked your post', 'post.php?id=105', '2022-03-22 02:38:49', 'no', 'yes'),
+(13, 11, 17, 'Asmita Banstola commented on your post', 'post.php?id=105', '2022-03-22 02:38:57', 'no', 'yes');
 
 -- --------------------------------------------------------
 
@@ -212,8 +225,10 @@ INSERT INTO `posts` (`id`, `body`, `added_by`, `date_added`, `likes`, `user_clos
 (87, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:43', 1, 'false', 'false'),
 (88, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:47', 1, 'false', 'false'),
 (89, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 18, '2021-12-27 13:04:54', 1, 'false', 'false'),
-(90, 'This is a post', 17, '2021-12-28 03:42:36', 1, 'false', 'false'),
-(98, 'HTML determines the structure of web pages. This structure alone is not enough to make a web page look good and interactive. So you\'ll use assisted technologies such as CSS and JavaScript to make your HTML beautiful and add interactivity, respectively.', 17, '2022-01-25 06:36:59', 0, 'false', 'false');
+(99, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 11, '2022-01-29 10:38:07', 0, 'false', 'false'),
+(103, 'HTML is the standard markup language for Web pages.\r\nWith HTML you can create your own Website.\r\nHTML is easy to learn - You will enjoy it!', 17, '2022-01-29 11:00:41', 1, 'false', 'false'),
+(104, 'this is a post', 11, '2022-01-30 02:49:09', 0, 'false', 'false'),
+(105, 'The class is at the core of Java. It is the logical construct upon which the entire Java language is \r\nbuilt because it defines the shape and nature of an object.', 11, '2022-03-22 02:38:21', 1, 'false', 'false');
 
 -- --------------------------------------------------------
 
@@ -238,7 +253,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (9, 25, 31, 4),
 (10, 26, 35, 4),
 (16, 34, 39, 1),
-(18, 30, 10, 4),
 (19, 27, 18, 2),
 (20, 31, 33, 4),
 (21, 39, 18, 1),
@@ -246,8 +260,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (26, 18, 33, 5),
 (27, 35, 32, 2),
 (31, 38, 35, 1),
-(32, 17, 10, 4),
-(35, 24, 25, 4),
 (36, 17, 36, 2),
 (38, 35, 27, 1),
 (39, 17, 36, 3),
@@ -258,14 +270,11 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (51, 38, 29, 1),
 (53, 12, 36, 1),
 (55, 28, 27, 5),
-(56, 25, 24, 3),
-(63, 24, 27, 2),
 (64, 29, 17, 1),
 (66, 39, 17, 4),
 (68, 11, 28, 1),
 (74, 38, 40, 1),
 (77, 25, 36, 3),
-(78, 18, 24, 5),
 (81, 34, 36, 2),
 (82, 35, 40, 4),
 (84, 27, 26, 5),
@@ -275,18 +284,15 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (93, 38, 36, 3),
 (94, 30, 37, 5),
 (95, 36, 17, 3),
-(98, 40, 10, 4),
 (100, 11, 18, 3),
 (104, 40, 39, 2),
 (110, 18, 28, 2),
 (111, 32, 37, 1),
 (112, 18, 26, 2),
 (114, 37, 17, 4),
-(117, 33, 10, 1),
 (118, 18, 31, 4),
 (121, 38, 38, 5),
 (122, 30, 36, 3),
-(125, 24, 27, 5),
 (127, 11, 25, 5),
 (128, 30, 27, 5),
 (136, 29, 18, 1),
@@ -294,16 +300,13 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (139, 25, 40, 2),
 (141, 35, 30, 5),
 (142, 30, 17, 5),
-(143, 17, 24, 4),
 (144, 39, 38, 4),
 (145, 31, 30, 4),
 (147, 39, 11, 1),
 (149, 29, 27, 3),
 (150, 31, 31, 2),
-(151, 18, 10, 4),
 (152, 39, 31, 4),
 (155, 26, 12, 1),
-(158, 27, 10, 1),
 (159, 39, 12, 1),
 (160, 32, 17, 5),
 (161, 11, 12, 5),
@@ -312,7 +315,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (166, 31, 29, 3),
 (167, 38, 38, 4),
 (168, 11, 36, 2),
-(169, 36, 24, 3),
 (172, 29, 32, 2),
 (174, 33, 39, 1),
 (175, 31, 31, 1),
@@ -344,7 +346,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (223, 31, 27, 4),
 (224, 33, 40, 5),
 (225, 33, 38, 2),
-(226, 10, 38, 3),
 (227, 40, 40, 3),
 (230, 26, 39, 4),
 (233, 29, 39, 4),
@@ -355,7 +356,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (241, 29, 28, 2),
 (242, 32, 26, 1),
 (243, 27, 18, 1),
-(244, 25, 24, 3),
 (245, 33, 33, 1),
 (246, 12, 35, 3),
 (249, 28, 33, 2),
@@ -364,32 +364,25 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (255, 31, 33, 4),
 (256, 35, 39, 3),
 (257, 26, 35, 5),
-(259, 37, 24, 3),
 (261, 40, 39, 3),
 (263, 11, 28, 5),
 (264, 34, 27, 4),
 (265, 11, 32, 2),
 (266, 17, 30, 2),
-(268, 10, 39, 5),
 (270, 27, 37, 1),
 (271, 27, 17, 2),
-(272, 24, 40, 5),
 (273, 35, 12, 2),
 (277, 18, 36, 3),
 (279, 28, 33, 1),
 (285, 31, 38, 2),
 (286, 27, 18, 4),
 (287, 12, 27, 4),
-(288, 10, 12, 3),
 (292, 18, 35, 4),
 (294, 12, 40, 5),
-(295, 18, 10, 3),
 (298, 30, 29, 1),
 (300, 28, 39, 4),
 (301, 32, 33, 2),
-(303, 10, 31, 2),
 (304, 32, 29, 4),
-(306, 10, 25, 2),
 (310, 39, 38, 1),
 (311, 33, 11, 3),
 (312, 30, 17, 4),
@@ -397,7 +390,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (318, 38, 39, 1),
 (321, 11, 30, 1),
 (322, 31, 30, 3),
-(324, 17, 24, 4),
 (327, 39, 29, 5),
 (328, 37, 38, 3),
 (331, 36, 26, 3),
@@ -405,7 +397,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (333, 26, 17, 2),
 (335, 30, 35, 1),
 (336, 35, 11, 3),
-(342, 24, 17, 2),
 (343, 25, 40, 2),
 (346, 27, 36, 4),
 (348, 30, 17, 2),
@@ -413,7 +404,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (350, 35, 18, 4),
 (351, 27, 11, 4),
 (352, 11, 12, 3),
-(353, 10, 29, 4),
 (355, 29, 31, 2),
 (357, 33, 27, 5),
 (358, 38, 31, 4),
@@ -421,7 +411,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (363, 40, 12, 3),
 (364, 36, 26, 2),
 (365, 27, 36, 5),
-(367, 10, 10, 4),
 (368, 36, 32, 3),
 (371, 18, 11, 5),
 (376, 32, 33, 4),
@@ -429,8 +418,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (381, 28, 11, 2),
 (388, 32, 17, 5),
 (392, 26, 25, 3),
-(395, 26, 10, 1),
-(396, 30, 24, 4),
 (398, 33, 31, 5),
 (403, 11, 39, 4),
 (405, 37, 27, 1),
@@ -438,7 +425,6 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (414, 29, 25, 5),
 (416, 39, 26, 5),
 (417, 28, 40, 5),
-(418, 17, 24, 2),
 (419, 33, 18, 5),
 (421, 12, 38, 3),
 (422, 35, 30, 2),
@@ -446,10 +432,8 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (427, 37, 36, 5),
 (428, 30, 35, 1),
 (429, 38, 27, 5),
-(431, 24, 30, 2),
 (434, 31, 30, 3),
 (435, 27, 36, 1),
-(436, 24, 11, 2),
 (437, 35, 29, 1),
 (438, 25, 18, 3),
 (440, 25, 29, 4),
@@ -457,13 +441,10 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (446, 29, 38, 1),
 (447, 29, 12, 4),
 (454, 35, 17, 5),
-(455, 24, 17, 2),
 (456, 29, 27, 3),
 (458, 25, 11, 4),
 (460, 27, 38, 5),
 (463, 30, 27, 3),
-(465, 31, 24, 4),
-(466, 12, 24, 5),
 (467, 40, 27, 5),
 (468, 26, 31, 2),
 (472, 35, 17, 1),
@@ -475,21 +456,21 @@ INSERT INTO `ratings` (`id`, `user_id`, `profile_id`, `rating`) VALUES
 (482, 36, 38, 1),
 (484, 35, 11, 5),
 (485, 30, 38, 2),
-(490, 30, 10, 2),
-(491, 36, 10, 5),
 (492, 25, 37, 2),
 (498, 11, 12, 4),
 (499, 27, 26, 1),
 (500, 27, 2, 3),
 (501, 3, 2, 3),
 (502, 17, 3, 4),
-(503, 18, 6, 3),
 (504, 17, 3, 4),
-(505, 18, 6, 3),
 (506, 37, 2, 3),
 (507, 2, 18, 5),
 (508, 2, 18, 5),
-(509, 44, 11, 3);
+(509, 44, 11, 3),
+(510, 45, 3, 4),
+(511, 46, 27, 3),
+(512, 47, 27, 3),
+(513, 17, 47, 5);
 
 -- --------------------------------------------------------
 
@@ -504,6 +485,13 @@ CREATE TABLE `reports` (
   `post_of` int(11) NOT NULL,
   `report_category` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `reported_by`, `post_id`, `post_of`, `report_category`) VALUES
+(4, 47, 105, 11, 'Inappropriate');
 
 -- --------------------------------------------------------
 
@@ -532,14 +520,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `num_posts`, `num_likes`, `user_closed`, `friend_array`) VALUES
 (2, 'Puja', 'Pradhan', 'puja_pradhan', 'Puja@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-10-12', 'assets/images/profile_pics/puja_pradhan1e8ba85f5071b94383c91292d63c3052n.jpeg', 1, 0, 'no', ',asmita_banstola,'),
-(3, 'Ruja', 'Pradhan', 'ruja_pradhan_1', 'R@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-10-12', 'assets/images/profile_pics/defaults/a.jpg', 2, 0, 'no', ',asmita_banstola,'),
-(6, 'Mickey', 'Mouse', 'mickey_mouse_1', 'Pu@gmail.com', '098f6bcd4621d373cade4e832627b4f6', '2021-10-12', 'assets/images/profile_pics/mickey_mouse_1d2e711d4eb9fce6c1194033b8c4e2890n.jpeg', 0, 0, 'no', ','),
-(10, 'Ruja', 'Pradhan', 'ruja_pradhan_1_2_3', 'Ruja.prd@gamil.com', '7adfca2f2aba4cd301a02b9f33ca9037', '2021-10-30', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
-(11, 'Monica', 'Green', 'monica_green', 'Monica@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-10-30', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ',asmita_banstola,'),
-(12, 'Suja', 'Amatya', 'suja_amatya', 'Suja@gmail.com', 'e86fdc2283aff4717103f2d44d0610f7', '2021-11-02', 'assets/images/profile_pics/suja_amatya6c2544878d1e0071b6faca80074caf1cn.jpeg', 0, 0, 'no', ',asmita_banstola,'),
-(17, 'Asmita', 'Banstola', 'asmita_banstola', 'Asmi@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/asmita_banstola4303054b312a931d70b8787590e8890dn.jpeg', 9, 2, 'no', ',anjana_poudel,ruja_pradhan_1,puja_pradhan,suja_amatya,monica_green,'),
-(18, 'Anjana', 'Poudel', 'anjana_poudel', 'Anjana@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/defaults/b.png', 5, 3, 'no', ',asmita_banstola,'),
-(24, 'Sandhya', 'Rai', 'sandhya_rai', 'Sandhya12@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-02', 'assets/images/profile_pics/defaults/b.png', 1, 0, 'no', ','),
+(3, 'Ruja', 'Pradhan', 'ruja_pradhan_1', 'Ruja@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-10-12', 'assets/images/profile_pics/defaults/a.jpg', 3, 0, 'no', ',asmita_banstola,'),
+(11, 'Monica', 'Green', 'monica_green', 'Monica@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-10-30', 'assets/images/profile_pics/defaults/b.png', 3, 1, 'no', ',asmita_banstola,suja_amatya,ram_bahadur,'),
+(12, 'Suja', 'Amatya', 'suja_amatya', 'Suja@gmail.com', 'e86fdc2283aff4717103f2d44d0610f7', '2021-11-02', 'assets/images/profile_pics/suja_amatya6c2544878d1e0071b6faca80074caf1cn.jpeg', 0, 0, 'no', ',asmita_banstola,monica_green,'),
+(17, 'Asmita', 'Banstola', 'asmita_banstola', 'Asmi@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-11-23', 'assets/images/profile_pics/asmita_banstola4303054b312a931d70b8787590e8890dn.jpeg', 9, 4, 'no', ',anjana_poudel,ruja_pradhan_1,puja_pradhan,suja_amatya,monica_green,'),
+(18, 'Anjanaa', 'Poudel', 'anjana_poudel', 'Anjana@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2021-11-23', 'assets/images/profile_pics/anjana_poudel8e4e0d8b85ba11409b45041f502faf11n.jpeg', 4, 3, 'no', ',asmita_banstola,'),
 (25, 'Sandhya', 'Rai', 'sandhya_rai_1', 'Sandy@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-06', 'assets/images/profile_pics/defaults/a.jpg', 1, 0, 'no', ','),
 (26, 'Riya', 'Aryal', 'riya_aryal', 'Riya@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-22', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
 (27, 'Jose ', 'Gross', 'jose_gross', 'Jose@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-24', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
@@ -559,7 +544,10 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 (41, 'Sacha', ' lawson', 'sacha_ lawson', 'Sacha@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-24', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
 (42, 'Sade', ' chen', 'sade_ chen', 'Sade@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2021-12-24', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ','),
 (43, 'Alex', 'Rai', 'alex_rai', 'Alex@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-03', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
-(44, 'Suhana', 'Kc', 'suhana_kc', 'Suhana@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-26', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ',');
+(44, 'Suhana', 'Kc', 'suhana_kc', 'Suhana@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-26', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
+(45, 'Arohi', 'Adhikari', 'arohi_adhikari', 'Arohi@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-28', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
+(46, 'Sanjay', 'Singh', 'sanjay_singh', 'Sanjay@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-29', 'assets/images/profile_pics/defaults/a.jpg', 0, 0, 'no', ','),
+(47, 'Ram', 'Bahadur', 'ram_bahadur', 'Ram@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2022-01-30', 'assets/images/profile_pics/defaults/b.png', 0, 0, 'no', ',monica_green,');
 
 --
 -- Indexes for dumped tables
@@ -655,55 +643,55 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `friend_requests`
 --
 ALTER TABLE `friend_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=510;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=514;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables

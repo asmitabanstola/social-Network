@@ -348,8 +348,8 @@ textarea:focus{
 	margin-bottom: 5px; 
 }
 .message#green{
-	background-color: #2ecc71;
-	border-color: #27ae60;
+	background-color: #616c66;
+	border-color: #616c66;
 	float:left;
 	margin-bottom: 5px: 
 }
@@ -377,7 +377,7 @@ textarea:focus{
 }
 #grey{
 	color: #000;
-	line-height: 7px;
+	line-height: 20px;
 	padding-bottom: 5px;
 	padding-left: 30px;
 }
@@ -540,7 +540,7 @@ textarea:focus{
 	margin-bottom: 0px;
 }
 .report_button{
-	margin-left: 600px;
+	margin-left: 260px;
     margin-top: 0px;
 }
 .small_profile_pic {

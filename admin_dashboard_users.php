@@ -36,13 +36,13 @@ if(isset($_SESSION['username'])){
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="admin_dashboard.php">
+                <a class="nav-link" href="admin_dashboard.php">
                   <span class="fa fa-file"></span>
                   Reported Posts
                 </a>
               </li>
              <li class="nav-item">
-                <a class="nav-link" href="admin_dashboard_users.php">
+                <a class="nav-link active" href="admin_dashboard_users.php">
                   <span class="fa fa-file"></span>
                   Users 
                 </a>
@@ -52,66 +52,54 @@ if(isset($_SESSION['username'])){
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           </div>
         </nav>
-
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
            <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="#">Posts</a></li> 
+    <li class="breadcrumb-item"><a href="#">Users</a></li> 
       </ol>
         </nav>
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Reported Posts</h1>
+          <h1 class="h2">Users</h1>
             <!-- <button class="btn btn-primary">Add company</button> -->
           </div>
-<div class="main">
-<!-- Portfolio Gallery Grid -->
-       <table border="1px" class="table table-striped">
+          <table border="1px" class="table table-striped">
             <thead>
   <tr>
     <th>SN</th>
-    <th>Reported By</th>
-    <th>Post</th>
-    <th>Posted By</th>
-    <th>Report Category</th>
+    <th>Firstname</th>
+     <th>Lastname</th>
+    <th>Email</th>
+    <th>Profile Picture</th>
     <th>Actions</th>
   </tr>
 </thead>
 <tbody>
   <?php
-    include('config/config.php');
-    $i=1;
-    $query=mysqli_query($con,"SELECT * FROM reports");
-    if(mysqli_num_rows($query)>0){
-    while($row=mysqli_fetch_array($query)){
-      $reported_by1=mysqli_query($con,"SELECT first_name FROM users WHERE id={$row['reported_by']}");
-      $reported_by=implode("", mysqli_fetch_assoc($reported_by1));
-      $post1=mysqli_query($con,"SELECT body FROM posts WHERE id={$row['post_id']}");
-       $post=implode("", mysqli_fetch_assoc($post1));
-      $posted_by1=mysqli_query($con,"SELECT first_name FROM users WHERE id={$row['post_of']}");
-       $posted_by=implode("", mysqli_fetch_assoc($posted_by1));
-      ?>
-    <tr>
-      <td><?php echo $i; ?></td>
-      <td><?php echo $reported_by; ?></td>
-      <td><?php echo $post; ?></td>
-      <td><?php echo $posted_by; ?></td>
-      <td><?php echo $row['report_category']; ?></td>
-      <td><!-- <a href="#"><button class="btn btn-primary" style="width:80px;float: left;">KEEP</button></a> -->  <a href="includes/form_handler/delete_report_post.php?post_id=<?php echo $row['post_id'];?>" onclick=" return confirm('Are you sure you want to delete this post?')"><br><button class="btn btn-danger">DELETE</button></a></td>
-      </tr>
-    </tr>
-    <?php
-      $i++;
-     } 
-   ?>
-
+      $i=1;
+      include('config/config.php');
+      $sql = "SELECT * FROM users WHERE user_closed='no'";
+      $query=mysqli_query($con,$sql);
+      while($row=mysqli_fetch_array($query)){
+  ?>
+<tr>
+  <td><?php echo $i; ?></td>
+  <td><?php echo $row['first_name']?></td>
+  <td><?php echo $row['last_name']?></td>
+  <td><?php echo $row['email']?></td>
+  <td><img src="<?php echo $row['profile_pic']; ?>" style="width:60px; height:60px;"></td>
+  <td><a href="#"><button class="btn btn-primary">KEEP</button></a>  <a href="includes/form_handler/delete_users.php?delete=<?php echo $row['id'];?>" onclick=" return confirm('Are you sure you want to delete this record?')"><button class="btn btn-danger">DISCARD </button></a></td>
+  </tr>
+</tr>
+<?php 
+    $i++;
+    } 
+ ?>
 </tbody>
 </table>
-<?php }else{
-?>
-<h6>No Reported Post yet!!</h6>
-<?php } ?>
+          <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+        </main>
       </div>
-     
-</body>
+    </div>
+  </body>
 </html>
