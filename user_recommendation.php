@@ -5,48 +5,48 @@
 		width:200px;
 		float: right;
 		position: relative;
-}
- .profile_recommend .profile_right{
-	display: inline-block;
-	position: relative;
-}
- input[type="submit"]{
-	width: 100px;
-}
-input[type="submit"]:active{
-	padding:5px 4px 4px 5px ;
-	color:#ff2;
-}
-.tooltip img{
-	height: 50px; 
-	width: 50px;
-	border-radius: 100%;
-	 float: left;
-}
-.tooltip {
-  position: relative;
-  display: inline-block;
-  opacity: 1;
-   z-index: 0;
-}
+		}
+		 .profile_recommend .profile_right{
+			display: inline-block;
+			position: relative;
+		}
+		 input[type="submit"]{
+			width: 100px;
+		}
+		input[type="submit"]:active{
+			padding:5px 4px 4px 5px ;
+			color:#ff2;
+		}
+		.tooltip img{
+			height: 50px; 
+			width: 50px;
+			border-radius: 100%;
+			 float: left;
+		}
+		.tooltip {
+		  position: relative;
+		  display: inline-block;
+		  opacity: 1;
+		   z-index: 0;
+		}
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #fff;
-  color: #000;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  left: 80%;
-  margin-left: -60px;
-  /* Position the tooltip */
-  position: absolute;
-}
+		.tooltip .tooltiptext {
+		  visibility: hidden;
+		  width: 120px;
+		  background-color: #fff;
+		  color: #000;
+		  text-align: center;
+		  border-radius: 6px;
+		  padding: 5px 0;
+		  left: 80%;
+		  margin-left: -60px;
+		  /* Position the tooltip */
+		  position: absolute;
+		}
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
+		.tooltip:hover .tooltiptext {
+		  visibility: visible;
+		}
 </style>
 <?php
 // session_start();

@@ -63,17 +63,18 @@ if(isset($_SESSION['username'])){
           <h1 class="h2">Users</h1>
             <!-- <button class="btn btn-primary">Add company</button> -->
           </div>
+          <div class="table-condensed">
           <table border="1px" class="table table-striped">
-            <thead>
-  <tr>
-    <th>SN</th>
-    <th>Firstname</th>
-     <th>Lastname</th>
-    <th>Email</th>
-    <th>Profile Picture</th>
-    <th>Actions</th>
-  </tr>
-</thead>
+            <thead class="thread-dark">
+              <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Firstname</th>
+                 <th scope="col">Lastname</th>
+                <th scope="col">Email</th>
+                <th scope="col">Profile Picture</th>
+                <th scope="col">Actions</th>
+              </tr>
+          </thead>
 <tbody>
   <?php
       $i=1;
@@ -83,12 +84,12 @@ if(isset($_SESSION['username'])){
       while($row=mysqli_fetch_array($query)){
   ?>
 <tr>
-  <td><?php echo $i; ?></td>
-  <td><?php echo $row['first_name']?></td>
-  <td><?php echo $row['last_name']?></td>
-  <td><?php echo $row['email']?></td>
-  <td><img src="<?php echo $row['profile_pic']; ?>" style="width:60px; height:60px;"></td>
-  <td><a href="#"><button class="btn btn-primary">KEEP</button></a>  <a href="includes/form_handler/delete_users.php?delete=<?php echo $row['id'];?>" onclick=" return confirm('Are you sure you want to delete this record?')"><button class="btn btn-danger">DISCARD </button></a></td>
+  <td scope="row"><?php echo $i; ?></td>
+  <td scope="row"><?php echo $row['first_name']?></td>
+  <td scope="row"><?php echo $row['last_name']?></td>
+  <td scope="row"><?php echo $row['email']?></td>
+  <td scope="row"><img src="<?php echo $row['profile_pic']; ?>" style="width:60px; height:60px;"></td>
+  <td scope="row"><a href="#"><button class="btn btn-primary">KEEP</button></a>  <a href="includes/form_handler/delete_users.php?delete=<?php echo $row['id'];?>" onclick=" return confirm('Are you sure you want to delete this record?')"><button class="btn btn-danger">DELETE </button></a></td>
   </tr>
 </tr>
 <?php 
@@ -97,6 +98,7 @@ if(isset($_SESSION['username'])){
  ?>
 </tbody>
 </table>
+</div>
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
         </main>
       </div>

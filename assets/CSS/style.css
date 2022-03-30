@@ -58,7 +58,6 @@ color:#fff ;
 	top: 50px;
 	position: relative;
 	width:75%;
-	min-width: 950px;
 }
  .column{
 	background-color: #E6EAE8;
@@ -286,7 +285,6 @@ textarea:focus{
 	position: relative;
 }
 .profile_main_column {
-	min-width: 675px;
 	float: right;
 	width: 70%;
 	z-index: -1;
@@ -377,7 +375,6 @@ textarea:focus{
 }
 #grey{
 	color: #000;
-	line-height: 20px;
 	padding-bottom: 5px;
 	padding-left: 30px;
 }
@@ -404,7 +401,7 @@ textarea:focus{
 	color:#1E96CA;
 }
 .liveSearchText p{
-	margin-left: 10px;
+	margin: 0px;
 	font-size: 12px;
 }
 .tab-content{
@@ -540,7 +537,6 @@ textarea:focus{
 	margin-bottom: 0px;
 }
 .report_button{
-	margin-left: 260px;
     margin-top: 0px;
 }
 .small_profile_pic {

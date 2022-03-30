@@ -1,5 +1,5 @@
 body {
-  font-size: .875rem;
+ 
 }
 
 .feather {
@@ -38,6 +38,7 @@ body {
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
+  padding: 20px;
 }
 
 .sidebar .nav-link .feather {
@@ -47,8 +48,9 @@ body {
 }
 
 .sidebar .nav-link.active {
-  color: #007bff;
+  color: #0b0b0c;
   background-color: #343a40;
+  padding: 20px;
 }
 
 .sidebar .nav-link:hover,
@@ -71,7 +73,7 @@ a:hover{
 .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
-  font-size: 1rem;
+  font-size: 20px;
   background-color: rgba(0, 0, 0, .25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
   color:#eccc68;
@@ -82,7 +84,7 @@ a:hover{
   font-size: 1rem;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
   color:#eccc68;
-  padding-right: 5px;
+  padding-right: 50px;
 }
 .navbar .form-control {
   padding: .75rem 1rem;
@@ -97,3 +99,6 @@ a:hover{
 }
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
+th {
+    text-align: center;
+}

@@ -128,7 +128,8 @@ class Notification {
 										<div class='notificationsProfilePic'>
 											<img src='" . $user_data['profile_pic'] . "'>
 										</div>
-										<p class='timestamp_smaller' id='grey'>" . $time_message . "</p>" . $row['message'] . "
+										" . $row['message'] . "
+										<p class='timestamp_smaller' id='grey'>" . $time_message . "</p>
 									</div>
 								</a>";
 		}
